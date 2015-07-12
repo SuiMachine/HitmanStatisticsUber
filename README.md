@@ -20,9 +20,10 @@ Uber features
 -------
 * Metronome
   
-In development
+In development / To do:
 -------
 * Cheats
+* GOG support
 
 How to use
 -------
