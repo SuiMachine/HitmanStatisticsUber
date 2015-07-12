@@ -31,5 +31,6 @@ Run the program while playing the game, during a mission all values will be upda
   
 Credits
 -------
-  * Original version developed by [nvillemin](https://github.com/nvillemin/HitmanStatistics).
-  * [SuicideMachine](http://www.twitch.tv/suicidemachine)
+* Original version developed by [nvillemin](https://github.com/nvillemin/HitmanStatistics).
+* [SuicideMachine](http://www.twitch.tv/suicidemachine)
+* Metronome uses samples from Round Here - Synths, taken from [Looperman.com](http://www.looperman.com/loops/detail/82774/round-here-synths-by-jvil83-free-280bpm-trap-synth-loop).
