@@ -9,6 +9,7 @@ namespace HitmanStatistics
     public partial class Form1 : Form
     {
         Metronome _metronome;
+        CheatsForms.CheatsHitman2 _hitman2cheats;
 
         // Base address value for pointers.
         const int baseAddress = 0x00400000;
@@ -19,7 +20,7 @@ namespace HitmanStatistics
             new SACombination(0, 0, 0, 1, 1, 0, 0, 1), new SACombination(0, 0, 0, 1, 0, 6, 0, 0), new SACombination(0, 0, 0, 1, 0, 3, 0, 1), new SACombination(0, 0, 0, 1, 0, 0, 1, 0), new SACombination(0, 0, 0, 1, 0, 0, 0, 2), 
             new SACombination(0, 0, 0, 0, 1, 0, 0, 1), new SACombination(1, 1, 0, 0, 1, 0, 0, 0), new SACombination(1, 1, 0, 0, 0, 3, 0, 0), new SACombination(1, 1, 0, 0, 0, 0, 0, 1), new SACombination(1, 0, 1, 1, 1, 0, 0, 0), 
             new SACombination(1, 0, 0, 1, 1, 1, 0, 0), new SACombination(1, 0, 0, 1, 0, 4, 0, 0), new SACombination(1, 0, 0, 1, 0, 1, 0, 1), new SACombination(1, 0, 0, 0, 1, 1, 0, 0), new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
-            new SACombination(2, 0, 0, 1, 0, 1, 0, 0), new SACombination(3, 0, 0, 1, 0, 0, 0, 0)};
+            new SACombination(2, 0, 0, 1, 0, 1, 0, 0), new SACombination(3, 0, 0, 1, 0, 0, 0, 0), new SACombination(2, 0, 1, 0, 0, 0, 0, 0)};
 
         // All the possible Silent Assassin combinations for Hitman Contracts
         SACombination[] validSACombinationHC = {
@@ -78,6 +79,7 @@ namespace HitmanStatistics
         private void Form1_Load(object sender, EventArgs e)
         {
             _metronome = new Metronome(this);
+            _hitman2cheats = new CheatsForms.CheatsHitman2();
         }
 
 
@@ -287,6 +289,12 @@ namespace HitmanStatistics
             _metronome.setgamenumber(3);
             _metronome.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
             _metronome.ShowDialog();
+        }
+
+        private void silentAssassinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _hitman2cheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
+            _hitman2cheats.ShowDialog();
         }
     }
 }

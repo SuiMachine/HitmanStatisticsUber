@@ -57,15 +57,15 @@
             this.Menu_Game_H2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Game_HC = new System.Windows.Forms.ToolStripMenuItem();
             this.uberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.IMG_SA = new System.Windows.Forms.Panel();
             this.cheatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codename47ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.silentAssassinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contractsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodMoneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.IMG_SA = new System.Windows.Forms.Panel();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -346,6 +346,45 @@
             this.uberToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.uberToolStripMenuItem.Text = "Uber";
             // 
+            // cheatsToolStripMenuItem
+            // 
+            this.cheatsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.codename47ToolStripMenuItem,
+            this.silentAssassinToolStripMenuItem,
+            this.contractsToolStripMenuItem,
+            this.bloodMoneyToolStripMenuItem});
+            this.cheatsToolStripMenuItem.Name = "cheatsToolStripMenuItem";
+            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cheatsToolStripMenuItem.Text = "Cheats";
+            // 
+            // codename47ToolStripMenuItem
+            // 
+            this.codename47ToolStripMenuItem.Enabled = false;
+            this.codename47ToolStripMenuItem.Name = "codename47ToolStripMenuItem";
+            this.codename47ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.codename47ToolStripMenuItem.Text = "Codename 47";
+            // 
+            // silentAssassinToolStripMenuItem
+            // 
+            this.silentAssassinToolStripMenuItem.Name = "silentAssassinToolStripMenuItem";
+            this.silentAssassinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.silentAssassinToolStripMenuItem.Text = "Silent Assassin";
+            this.silentAssassinToolStripMenuItem.Click += new System.EventHandler(this.silentAssassinToolStripMenuItem_Click);
+            // 
+            // contractsToolStripMenuItem
+            // 
+            this.contractsToolStripMenuItem.Enabled = false;
+            this.contractsToolStripMenuItem.Name = "contractsToolStripMenuItem";
+            this.contractsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.contractsToolStripMenuItem.Text = "Contracts";
+            // 
+            // bloodMoneyToolStripMenuItem
+            // 
+            this.bloodMoneyToolStripMenuItem.Enabled = false;
+            this.bloodMoneyToolStripMenuItem.Name = "bloodMoneyToolStripMenuItem";
+            this.bloodMoneyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.bloodMoneyToolStripMenuItem.Text = "Blood Money";
+            // 
             // metronomeToolStripMenuItem
             // 
             this.metronomeToolStripMenuItem.Name = "metronomeToolStripMenuItem";
@@ -376,42 +415,6 @@
             this.IMG_SA.Name = "IMG_SA";
             this.IMG_SA.Size = new System.Drawing.Size(16, 16);
             this.IMG_SA.TabIndex = 33;
-            // 
-            // cheatsToolStripMenuItem
-            // 
-            this.cheatsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.codename47ToolStripMenuItem,
-            this.silentAssassinToolStripMenuItem,
-            this.contractsToolStripMenuItem,
-            this.bloodMoneyToolStripMenuItem});
-            this.cheatsToolStripMenuItem.Enabled = false;
-            this.cheatsToolStripMenuItem.Name = "cheatsToolStripMenuItem";
-            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.cheatsToolStripMenuItem.Text = "Cheats";
-            // 
-            // codename47ToolStripMenuItem
-            // 
-            this.codename47ToolStripMenuItem.Name = "codename47ToolStripMenuItem";
-            this.codename47ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.codename47ToolStripMenuItem.Text = "Codename 47";
-            // 
-            // silentAssassinToolStripMenuItem
-            // 
-            this.silentAssassinToolStripMenuItem.Name = "silentAssassinToolStripMenuItem";
-            this.silentAssassinToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.silentAssassinToolStripMenuItem.Text = "Silent Assassin";
-            // 
-            // contractsToolStripMenuItem
-            // 
-            this.contractsToolStripMenuItem.Name = "contractsToolStripMenuItem";
-            this.contractsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.contractsToolStripMenuItem.Text = "Contracts";
-            // 
-            // bloodMoneyToolStripMenuItem
-            // 
-            this.bloodMoneyToolStripMenuItem.Name = "bloodMoneyToolStripMenuItem";
-            this.bloodMoneyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.bloodMoneyToolStripMenuItem.Text = "Blood Money";
             // 
             // Form1
             // 
