@@ -380,10 +380,10 @@
             // 
             // bloodMoneyToolStripMenuItem
             // 
-            this.bloodMoneyToolStripMenuItem.Enabled = false;
             this.bloodMoneyToolStripMenuItem.Name = "bloodMoneyToolStripMenuItem";
             this.bloodMoneyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bloodMoneyToolStripMenuItem.Text = "Blood Money";
+            this.bloodMoneyToolStripMenuItem.Click += new System.EventHandler(this.bloodMoneyToolStripMenuItem_Click);
             // 
             // metronomeToolStripMenuItem
             // 

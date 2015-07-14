@@ -10,6 +10,7 @@ namespace HitmanStatistics
     {
         Metronome _metronome;
         CheatsForms.CheatsHitman2 _hitman2cheats;
+        CheatsForms.CheatsHitmanBloodMoney _hitmanbloodmoneycheats;
 
         // Base address value for pointers.
         const int baseAddress = 0x00400000;
@@ -80,6 +81,7 @@ namespace HitmanStatistics
         {
             _metronome = new Metronome(this);
             _hitman2cheats = new CheatsForms.CheatsHitman2();
+            _hitmanbloodmoneycheats = new CheatsForms.CheatsHitmanBloodMoney();
         }
 
 
@@ -295,6 +297,12 @@ namespace HitmanStatistics
         {
             _hitman2cheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
             _hitman2cheats.ShowDialog();
+        }
+
+        private void bloodMoneyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _hitmanbloodmoneycheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
+            _hitmanbloodmoneycheats.ShowDialog();
         }
     }
 }

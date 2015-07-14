@@ -19,11 +19,13 @@ Features
 Uber features
 -------
 * Metronome
+* Built in Cheat List for Hitman 2
+* Built in Cheat Unlocker for Blood Money
   
 In development / To do:
 -------
-* Cheats
 * GOG support
+* Codename 47 and Contracts cheats
 
 How to use
 -------
