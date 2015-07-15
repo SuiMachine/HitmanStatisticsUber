@@ -2,7 +2,7 @@ Hitman Statistics Uber
 ============
 Expended Hitman 2 and Hitman Contracts real-time statistics tracker.
 
-Features
+Features Hitman 2 & Contracts
 -------
 * Silent Assassin rating
 * Current mission name & number
@@ -19,6 +19,7 @@ Features
 Uber features
 -------
 * Metronome
+* Blood Money support (incomplete)
 * Built in Cheat List for Hitman 2
 * Built in Cheat Unlocker for Blood Money
   
