@@ -97,6 +97,24 @@
     <Compile Include="Cheats\CheatsHitmanBloodMoney.Designer.cs">
       <DependentUpon>CheatsHitmanBloodMoney.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hitman2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Hitman2.Designer.cs">
+      <DependentUpon>Hitman2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HitmanContracts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HitmanContracts.Designer.cs">
+      <DependentUpon>HitmanContracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HitmanBloodMoney.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HitmanBloodMoney.Designer.cs">
+      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="Metronome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hitman2.resx">
+      <DependentUpon>Hitman2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HitmanContracts.resx">
+      <DependentUpon>HitmanContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HitmanBloodMoney.resx">
+      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Metronome.resx">
       <DependentUpon>Metronome.cs</DependentUpon>
