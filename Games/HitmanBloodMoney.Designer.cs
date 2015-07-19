@@ -218,9 +218,9 @@
             this.LB_Witnessess.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Witnessess.Location = new System.Drawing.Point(46, 259);
             this.LB_Witnessess.Name = "LB_Witnessess";
-            this.LB_Witnessess.Size = new System.Drawing.Size(91, 20);
+            this.LB_Witnessess.Size = new System.Drawing.Size(83, 20);
             this.LB_Witnessess.TabIndex = 92;
-            this.LB_Witnessess.Text = "Witnessess";
+            this.LB_Witnessess.Text = "Witnesses";
             // 
             // NB_CoversBlown
             // 

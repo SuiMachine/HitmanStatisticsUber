@@ -11,6 +11,7 @@ namespace HitmanStatistics
         Metronome _metronome;
         CheatsForms.CheatsHitman2 _hitman2cheats;
         CheatsForms.CheatsHitmanBloodMoney _hitmanbloodmoneycheats;
+        Initial _initial;
         Hitman2 _hitman2;
         HitmanContracts _hitman3;
         HitmanBloodMoney _hitmanbloodmoney;
@@ -31,36 +32,26 @@ namespace HitmanStatistics
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            _initial = new Initial(this);
             _metronome = new Metronome(this);
             _hitman2cheats = new CheatsForms.CheatsHitman2();
             _hitmanbloodmoneycheats = new CheatsForms.CheatsHitmanBloodMoney();
+            DisplayPanel.Controls.Add(_initial);
         }
 
         private void Menu_Game_H2_Click(object sender, EventArgs e)
         {
-            DisplayPanel.Controls.Clear();
-            disposeOfUserControlsForms();
-            _hitman2 = new Hitman2();
-            DisplayPanel.Controls.Add(_hitman2);
-            gameNumber = 2;
+            setFormTo(2);
         }
 
         private void Menu_Game_HC_Click(object sender, EventArgs e)
         {
-            DisplayPanel.Controls.Clear();
-            disposeOfUserControlsForms();
-            _hitman3 = new HitmanContracts();
-            DisplayPanel.Controls.Add(_hitman3);
-            gameNumber = 3;
+            setFormTo(3);
         }
 
         private void hitmanBloodMoneyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DisplayPanel.Controls.Clear();
-            disposeOfUserControlsForms();
-            _hitmanbloodmoney = new HitmanBloodMoney();
-            DisplayPanel.Controls.Add(_hitmanbloodmoney);
-            gameNumber = 4;
+            setFormTo(4);
         }
 
         private void metronomeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -80,6 +71,34 @@ namespace HitmanStatistics
         {
             _hitmanbloodmoneycheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
             _hitmanbloodmoneycheats.ShowDialog();
+        }
+
+        public void setFormTo(int i)
+        {
+            if(i==2)
+            {
+                DisplayPanel.Controls.Clear();
+                disposeOfUserControlsForms();
+                _hitman2 = new Hitman2();
+                DisplayPanel.Controls.Add(_hitman2);
+                gameNumber = 2;
+            }
+            else if(i==3)
+            {
+                DisplayPanel.Controls.Clear();
+                disposeOfUserControlsForms();
+                _hitman3 = new HitmanContracts();
+                DisplayPanel.Controls.Add(_hitman3);
+                gameNumber = 3;
+            }
+            else if(i==4)
+            {
+                DisplayPanel.Controls.Clear();
+                disposeOfUserControlsForms();
+                _hitmanbloodmoney = new HitmanBloodMoney();
+                DisplayPanel.Controls.Add(_hitmanbloodmoney);
+                gameNumber = 4;
+            }
         }
 
         private void disposeOfUserControlsForms()

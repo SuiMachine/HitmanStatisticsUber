@@ -52,7 +52,7 @@
             this.uberToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(297, 24);
+            this.MainMenu.Size = new System.Drawing.Size(291, 24);
             this.MainMenu.TabIndex = 34;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -145,16 +145,17 @@
             // DisplayPanel
             // 
             this.DisplayPanel.AutoSize = true;
-            this.DisplayPanel.Location = new System.Drawing.Point(-1, 27);
+            this.DisplayPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.DisplayPanel.Location = new System.Drawing.Point(0, 24);
             this.DisplayPanel.Name = "DisplayPanel";
-            this.DisplayPanel.Size = new System.Drawing.Size(300, 355);
+            this.DisplayPanel.Size = new System.Drawing.Size(291, 0);
             this.DisplayPanel.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 376);
+            this.ClientSize = new System.Drawing.Size(291, 378);
             this.Controls.Add(this.DisplayPanel);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

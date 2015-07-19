@@ -15,7 +15,7 @@ namespace HitmanStatistics
         const int baseAddress = 0x00400000;
 
         Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
-            { "00_main.", new Tuple<string, int>("Death of a Showman", 1) },          { "m01_main.", new Tuple<string, int>("Vintage Year", 2) },     { "03_main.", new Tuple<string, int>("Curtains Down", 3) },     { "04_main.", new Tuple<string, int>("Flatline", 4) },             { "05_main.", new Tuple<string, int>("A New Life", 5) },
+            { "00_main.", new Tuple<string, int>("Death of a Showman", 1) },          { "01_main.", new Tuple<string, int>("Vintage Year", 2) },     { "03_main.", new Tuple<string, int>("Curtains Down", 3) },     { "04_main.", new Tuple<string, int>("Flatline", 4) },             { "05_main.", new Tuple<string, int>("A New Life", 5) },
             { "06_main.", new Tuple<string, int>("The Murder of Crows", 6) },         { "02_main.", new Tuple<string, int>("You Better Watch Out", 7) },   { "08_main.", new Tuple<string, int>("Death of the Mississippi", 8) },      { "09_main.", new Tuple<string, int>("Till Death Do Us Part", 9) },         { "10_main.", new Tuple<string, int>("The House of Cards", 10) },
             { "11_main.", new Tuple<string, int>("Dance with the Devil", 11) },   { "12_main.", new Tuple<string, int>("Amendment XXV", 12) },   { "13_main.", new Tuple<string, int>("Requiem", 13) }};
 
@@ -28,11 +28,13 @@ namespace HitmanStatistics
         bool isMissionActive;
         string gameName="H:BM";
         public int gameNumber;
-        int mapNumber, nbTotalKills, nbShotsFired, nbShotsHit, nbCloseCombatKills, nbAccidents, nbHeadshots, nbBodiesFound, nbCoversBlown,NbWitnesses, HCpointerNumber;
+        int mapNumber, nbTotalKills, nbShotsFired, nbShotsHit, nbCloseCombatKills, nbAccidents, nbHeadshots, nbBodiesFound, nbCoversBlown, nbWitnesses, nbSeenByACamera, HCpointerNumber;
 
         public HitmanBloodMoney()
         {
             InitializeComponent();
+            imgSA = Properties.Resources.Yes;
+            imgNotSA = Properties.Resources.No;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -72,7 +74,7 @@ namespace HitmanStatistics
                 if (isMissionActive) // A mission is currently active, ready to read memory.
                 {
                     //Reading timer
-                    missionTime = Trainer.ReadFloat("HitmanBloodMoney", baseAddress + 0x435624);
+                    missionTime = Trainer.ReadPointerFloat("HitmanBloodMoney", baseAddress + 0x038544, new int[4] {0x354, 0xc, 0x58, 0xc});
                     LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
                     //Rest of stuff
                     nbTotalKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2588);
@@ -83,7 +85,9 @@ namespace HitmanStatistics
                     nbHeadshots = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2560);
                     nbBodiesFound = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2608);
                     nbCoversBlown = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2578);
-                    NbWitnesses = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2574);
+                    nbWitnesses = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2574);
+                    nbSeenByACamera = Trainer.ReadByte("HitmanBloodMoney", baseAddress + 0x5B2624);
+                    
 
                     // Checking if the actual rating is SA according to the current stats
 
@@ -101,15 +105,25 @@ namespace HitmanStatistics
                     // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
                     NB_TotalKills.Text = nbTotalKills.ToString();
+                    NB_TotalKills.ForeColor = Color.Gray;
                     NB_ShotsFired.Text = nbShotsFired.ToString();
                     NB_ShotsHit.Text = nbShotsHit.ToString();
                     NB_CloseEncounterKills.Text = nbCloseCombatKills.ToString();
                     NB_Accidents.Text = nbAccidents.ToString();
                     NB_Headshots.Text = nbHeadshots.ToString();
                     NB_BodiesFound.Text = nbBodiesFound.ToString();
+                    NB_BodiesFound.ForeColor = Color.Gray;
                     NB_CoversBlown.Text = nbCoversBlown.ToString();
-                    NB_Witnessess.Text = NbWitnesses.ToString();
-                    NB_SeenByACamera.Text = "0";
+                    NB_CoversBlown.ForeColor = Color.Gray;
+                    NB_Witnessess.Text = nbWitnesses.ToString();
+                    NB_Witnessess.ForeColor = Color.Gray;
+                    if (nbSeenByACamera == 0)
+                    {
+                        NB_SeenByACamera.Text = "0";
+                    }
+                    else
+                        NB_SeenByACamera.Text = "1";
+
                 }
             }
             else

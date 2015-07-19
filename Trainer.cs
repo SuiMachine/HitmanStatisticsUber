@@ -180,6 +180,39 @@ public class Trainer
         return Value;
     }
 
+    public static int ReadPointedAdress(string EXENAME, int Pointer, int[] Offset)
+    {
+        byte Value = 0;
+        int adress = 0x0;
+        checked
+        {
+            try
+            {
+                Process[] Proc = Process.GetProcessesByName(EXENAME);
+                if (Proc.Length != 0)
+                {
+                    int Bytes = 0;
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    adress = Handle;
+                    if (Handle != 0)
+                    {
+                        foreach (int i in Offset)
+                        {
+                            ReadProcessMemoryInteger((int)Handle, Pointer, ref Pointer, 4, ref Bytes);
+                            Pointer += i;
+                            adress = Pointer;
+                        }
+                        ReadProcessMemoryByte((int)Handle, Pointer, ref Value, 2, ref Bytes);
+                        CloseHandle(Handle);
+                    }
+                }
+            }
+            catch
+            { }
+        }
+        return adress;
+    }
+
     public static byte ReadPointerByte(string EXENAME, int Pointer, int[] Offset)
     {
         byte Value = 0;
