@@ -80,6 +80,7 @@ namespace HitmanStatistics
                 DisplayPanel.Controls.Clear();
                 disposeOfUserControlsForms();
                 _hitman2 = new Hitman2();
+                SetSizeBecauseIDK(_hitman2.Size.Width, _hitman2.Size.Height);
                 DisplayPanel.Controls.Add(_hitman2);
                 gameNumber = 2;
             }
@@ -88,6 +89,7 @@ namespace HitmanStatistics
                 DisplayPanel.Controls.Clear();
                 disposeOfUserControlsForms();
                 _hitman3 = new HitmanContracts();
+                SetSizeBecauseIDK(_hitman3.Size.Width, _hitman3.Size.Height);
                 DisplayPanel.Controls.Add(_hitman3);
                 gameNumber = 3;
             }
@@ -96,9 +98,16 @@ namespace HitmanStatistics
                 DisplayPanel.Controls.Clear();
                 disposeOfUserControlsForms();
                 _hitmanbloodmoney = new HitmanBloodMoney();
+                SetSizeBecauseIDK(_hitmanbloodmoney.Size.Width, _hitmanbloodmoney.Size.Height);
                 DisplayPanel.Controls.Add(_hitmanbloodmoney);
                 gameNumber = 4;
             }
+        }
+
+        public void SetSizeBecauseIDK(int x, int y)
+        {
+            this.Width = x;
+            this.Height = y+48;
         }
 
         private void disposeOfUserControlsForms()

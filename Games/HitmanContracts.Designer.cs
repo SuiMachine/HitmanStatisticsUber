@@ -344,7 +344,7 @@
             this.Controls.Add(this.NB_InnocentsKilled);
             this.Controls.Add(this.LB_MapName);
             this.Name = "HitmanContracts";
-            this.Size = new System.Drawing.Size(301, 310);
+            this.Size = new System.Drawing.Size(301, 314);
             this.ResumeLayout(false);
             this.PerformLayout();
 

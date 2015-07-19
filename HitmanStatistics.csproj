@@ -122,7 +122,6 @@
       <DependentUpon>Metronome.cs</DependentUpon>
     </Compile>
     <Compile Include="KeyGrabber.cs" />
-    <Compile Include="PaternScan.cs" />
     <Compile Include="Pointer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

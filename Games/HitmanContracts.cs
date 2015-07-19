@@ -165,6 +165,8 @@ namespace HitmanStatistics
         private bool SilentAssassin()
         {
             SACombination[] validSACombination = null;
+            if (mapName == "Asylum Aftermath" && nbCloseEncounters > 0)
+                return false;
             validSACombination = validSACombinationHC;
 
             // Checking every possible SA combination

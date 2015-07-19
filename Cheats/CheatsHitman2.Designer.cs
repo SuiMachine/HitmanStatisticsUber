@@ -128,7 +128,7 @@
             this.B_SigScan.Name = "B_SigScan";
             this.B_SigScan.Size = new System.Drawing.Size(75, 23);
             this.B_SigScan.TabIndex = 2;
-            this.B_SigScan.Text = "Sig Scan";
+            this.B_SigScan.Text = "Get a value";
             this.B_SigScan.UseVisualStyleBackColor = true;
             this.B_SigScan.Click += new System.EventHandler(this.B_SigScan_Click);
             // 

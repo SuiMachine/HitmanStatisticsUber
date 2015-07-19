@@ -15,15 +15,12 @@ namespace CheatsForms
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         const int baseAddress = 0x00400000;
         String mapName;
-        IntPtr pAddr;
-        int startadress = 0x0;
         static string processName = "hitman2";
         Process[] myProcess;
         bool foundProcess = false;
         bool isMissionActive;
         int mapNumber;
         int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
-        int foundAdress = 0x0;
         byte value=0;
 
         // Dictionary used to convert the raw map names into easily readable names and a map number to access the second offsets declared previously.
@@ -69,23 +66,8 @@ namespace CheatsForms
 
                 if (isMissionActive) // A mission is currently active, ready to read memory.
                 {
-                    startadress = Trainer.ReadPointedAdress("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
-                    SigScan _sigScan = new SigScan();
-                    _sigScan.Process = myProcess[0];
-                    _sigScan.Address = new IntPtr(startadress);
-                    _sigScan.Size = 0x10000;
-                    pAddr = _sigScan.FindPattern(new byte[] { 0x29, 0x1A, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x5C, 0xFA, 0x06, 0x05, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x92, 0x19, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x80, 0xAD, 0x0A, 0x40, 0xF0, 0xAD, 0x0A, 0x40, 0x60, 0xAE, 0x0A, 0x40, 0xD0, 0xAE, 0x0A, 0x40, 0x80, 0xAD, 0x0A, 0x40 }, "???????xxxxxxxxxxxxx?????xxx?xxx?xxx???xxx??xx?xxxxx????????????????????", 24);
-                    foundAdress = pAddr.ToInt32();
-                    value = Trainer.ReadByte("hitman2", foundAdress);
+                    value = Trainer.ReadPointerByte("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x245 });
                     TB_Value.Text = value.ToString();
-                    if(foundAdress!=0x0)
-                    {
-                        MessageBox.Show("Adress found: 0x" + foundAdress.ToString("X4"));
-                    }
-                    else
-                    {
-                        MessageBox.Show("Adress not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
             }
             else
@@ -105,14 +87,7 @@ namespace CheatsForms
 
             if (foundProcess)
             {
-                if(foundAdress != 0x0)
-                {
-                    Trainer.WriteByte("hitman2", foundAdress, value);
-                }
-                else
-                {
-                    MessageBox.Show("Found adress equals: 0x0. Do a sig scan first. Sometimes sig scan may not find anything.");
-                }
+                Trainer.WritePointerByte("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x245 }, value);
             }
         }
 

@@ -28,7 +28,8 @@ namespace HitmanStatistics
         bool isMissionActive;
         string gameName="H:BM";
         public int gameNumber;
-        int mapNumber, nbTotalKills, nbShotsFired, nbShotsHit, nbCloseCombatKills, nbAccidents, nbHeadshots, nbBodiesFound, nbCoversBlown, nbWitnesses, nbSeenByACamera, HCpointerNumber;
+        int mapNumber, nbTargetKills, nbGatorGangKills, nbGuardKills1, nbGuardKills2, nbCivilianKills, nbShotsFired, nbShotsHit, nbCloseCombatKills, nbGuardsHarmed, nbCiviliansHarmed, nbAccidents, nbHeadshots, nbBodiesFoundTarget, nbBodiesFoundNonTarget, nbCoversBlown, nbWitnesses, nbSeenByACamera;
+        int nbGatorGangKills_zero = 0;
 
         public HitmanBloodMoney()
         {
@@ -65,10 +66,6 @@ namespace HitmanStatistics
                     // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment.
                     // The current screen is something like the main menu, the briefing or a cutscene.
                     isMissionActive = false;
-
-                    HCpointerNumber++;
-                    if (HCpointerNumber > 10)
-                        HCpointerNumber = 0;
                 }
 
                 if (isMissionActive) // A mission is currently active, ready to read memory.
@@ -77,14 +74,20 @@ namespace HitmanStatistics
                     missionTime = Trainer.ReadPointerFloat("HitmanBloodMoney", baseAddress + 0x038544, new int[4] {0x354, 0xc, 0x58, 0xc});
                     LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
                     //Rest of stuff
-                    nbTotalKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2588);
+                    nbTargetKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B25A4);
+                    nbGuardKills1 = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2578);
+                    nbGuardKills2 = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2588);
+                    nbCivilianKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2590);
+                    nbGuardsHarmed = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B258C);
+                    nbCiviliansHarmed = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2594);
                     nbShotsFired = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2554);
                     nbShotsHit = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2558);
                     nbCloseCombatKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B25B0);
                     nbAccidents = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B256C);
                     nbHeadshots = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2560);
-                    nbBodiesFound = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2608);
-                    nbCoversBlown = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2578);
+                    nbBodiesFoundTarget = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B260C);
+                    nbBodiesFoundNonTarget = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2608);
+                    nbCoversBlown = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2614);
                     nbWitnesses = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B2574);
                     nbSeenByACamera = Trainer.ReadByte("HitmanBloodMoney", baseAddress + 0x5B2624);
                     
@@ -104,17 +107,22 @@ namespace HitmanStatistics
 
                     // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
-                    NB_TotalKills.Text = nbTotalKills.ToString();
-                    NB_TotalKills.ForeColor = Color.Gray;
+                    if(!(mapName == "Death of the Mississippi" || mapName == "Till Death Do Us Part"))
+                        NB_TotalKills.Text = (nbTargetKills + nbGuardKills1 + nbGuardKills2 + nbCivilianKills).ToString();
+                    else
+                    {
+                        if (missionTime == 0)
+                            nbGatorGangKills_zero = nbGatorGangKills;
+                        nbGatorGangKills = Trainer.ReadInteger("HitmanBloodMoney", baseAddress + 0x5B304C);
+                        NB_TotalKills.Text = (nbTargetKills + nbGuardKills1 + nbGuardKills2 + nbCivilianKills + (nbGatorGangKills -nbGatorGangKills_zero)).ToString();
+                    }
                     NB_ShotsFired.Text = nbShotsFired.ToString();
                     NB_ShotsHit.Text = nbShotsHit.ToString();
                     NB_CloseEncounterKills.Text = nbCloseCombatKills.ToString();
                     NB_Accidents.Text = nbAccidents.ToString();
                     NB_Headshots.Text = nbHeadshots.ToString();
-                    NB_BodiesFound.Text = nbBodiesFound.ToString();
-                    NB_BodiesFound.ForeColor = Color.Gray;
+                    NB_BodiesFound.Text = (nbBodiesFoundTarget + nbBodiesFoundNonTarget).ToString();
                     NB_CoversBlown.Text = nbCoversBlown.ToString();
-                    NB_CoversBlown.ForeColor = Color.Gray;
                     NB_Witnessess.Text = nbWitnesses.ToString();
                     NB_Witnessess.ForeColor = Color.Gray;
                     if (nbSeenByACamera == 0)

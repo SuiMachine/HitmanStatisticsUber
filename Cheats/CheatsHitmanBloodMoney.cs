@@ -20,6 +20,7 @@ namespace CheatsForms
         bool isSteam = false;
         int ActivateAdressRetail = 0x8ACA89;
         int ActivateAdressSteam = 0x8ABA89;
+        int SavedFilesValue = 0;
 
         public CheatsHitmanBloodMoney()
         {
@@ -91,6 +92,32 @@ namespace CheatsForms
                 isSteam = true;
             else
                 isSteam = false;
+        }
+
+        private void TB_AmountOfSaves_TextChanged(object sender, EventArgs e)
+        {
+            var value = 0;
+            if (int.TryParse(TB_AmountOfSaves.Text, out value))
+            {
+                SavedFilesValue = value;
+            }
+        }
+
+        private void B_ReadSaveFiles_Click(object sender, EventArgs e)
+        {
+            if(foundProcess)
+            {
+                SavedFilesValue = Trainer.ReadInteger("HitmanBloodMoney", 0x009B209C);
+                TB_AmountOfSaves.Text = SavedFilesValue.ToString();
+            }
+        }
+
+        private void B_WriteAValue_Click(object sender, EventArgs e)
+        {
+            if(foundProcess)
+            {
+                Trainer.WriteInteger("HitmanBloodMoney", 0x009B209C, SavedFilesValue);
+            }
         }
     }
 }
