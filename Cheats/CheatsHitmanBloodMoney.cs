@@ -39,7 +39,18 @@ namespace CheatsForms
 
         private void CheckIfRunning_Tick(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
+            if (myProcess == null || myProcess.Length == 0)
+            {
+                myProcess = Process.GetProcessesByName("HitmanBloodMoney");
+
+                if (myProcess.Length != 0)
+                {
+                    L_GameRunning.Text = "Blood Money is running";
+                    L_GameRunning.ForeColor = Color.Green;
+                    CheckIfRunning.Interval = 50;
+                }
+            }
+
 
             if (myProcess.Length > 0)
             {
@@ -66,9 +77,9 @@ namespace CheatsForms
             {
                 CheckIfSteam();
                 if (isSteam)
-                    Trainer.WriteByte(processName, ActivateAdressSteam, 1);
+                    Trainer.WriteByte(myProcess, ActivateAdressSteam, 1);
                 else
-                    Trainer.WriteByte(processName, ActivateAdressRetail, 1);
+                    Trainer.WriteByte(myProcess, ActivateAdressRetail, 1);
             }
         }
 
@@ -78,9 +89,9 @@ namespace CheatsForms
             {
                 CheckIfSteam();
                 if (isSteam)
-                    Trainer.WriteByte(processName, ActivateAdressSteam, 0);
+                    Trainer.WriteByte(myProcess, ActivateAdressSteam, 0);
                 else
-                    Trainer.WriteByte(processName, ActivateAdressRetail, 0);
+                    Trainer.WriteByte(myProcess, ActivateAdressRetail, 0);
             }
         }
 
@@ -107,7 +118,7 @@ namespace CheatsForms
         {
             if(foundProcess)
             {
-                SavedFilesValue = Trainer.ReadInteger("HitmanBloodMoney", 0x009B209C);
+                SavedFilesValue = Trainer.ReadInteger(myProcess, 0x009B209C);
                 TB_AmountOfSaves.Text = SavedFilesValue.ToString();
             }
         }
@@ -116,7 +127,7 @@ namespace CheatsForms
         {
             if(foundProcess)
             {
-                Trainer.WriteInteger("HitmanBloodMoney", 0x009B209C, SavedFilesValue);
+                Trainer.WriteInteger(myProcess, 0x009B209C, SavedFilesValue);
             }
         }
     }

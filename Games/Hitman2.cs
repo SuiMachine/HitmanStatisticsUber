@@ -18,9 +18,10 @@ namespace HitmanStatistics
         SACombination[] validSACombinationH2 = {
             new SACombination(0, 1, 0, 0, 1, 2, 0, 0), new SACombination(0, 1, 0, 0, 0, 5, 0, 0), new SACombination(0, 1, 0, 0, 0, 2, 0, 1), new SACombination(0, 0, 0, 1, 2, 0, 0, 0), new SACombination(0, 0, 0, 1, 1, 3, 0, 0), 
             new SACombination(0, 0, 0, 1, 1, 0, 0, 1), new SACombination(0, 0, 0, 1, 0, 6, 0, 0), new SACombination(0, 0, 0, 1, 0, 3, 0, 1), new SACombination(0, 0, 0, 1, 0, 0, 1, 0), new SACombination(0, 0, 0, 1, 0, 0, 0, 2), 
-            new SACombination(0, 0, 0, 0, 1, 0, 0, 1), new SACombination(1, 1, 0, 0, 1, 0, 0, 0), new SACombination(1, 1, 0, 0, 0, 3, 0, 0), new SACombination(1, 1, 0, 0, 0, 0, 0, 1), new SACombination(1, 0, 1, 1, 1, 0, 0, 0), 
-            new SACombination(1, 0, 0, 1, 1, 1, 0, 0), new SACombination(1, 0, 0, 1, 0, 4, 0, 0), new SACombination(1, 0, 0, 1, 0, 1, 0, 1), new SACombination(1, 0, 0, 0, 1, 1, 0, 0), new SACombination(2, 1, 0, 0, 0, 1, 0, 0),
-            new SACombination(2, 0, 0, 1, 0, 1, 0, 0), new SACombination(3, 0, 0, 1, 0, 0, 0, 0), new SACombination(2, 0, 2, 0, 0, 0, 0, 0)};
+            new SACombination(0, 0, 0, 0, 1, 0, 0, 1), new SACombination(1, 1, 1, 0, 0, 2, 0, 0), new SACombination(1, 1, 0, 0, 1, 0, 0, 0), new SACombination(1, 1, 0, 0, 0, 3, 0, 0), new SACombination(1, 1, 0, 0, 0, 0, 0, 1),
+            new SACombination(1, 0, 1, 1, 1, 0, 0, 0), new SACombination(1, 0, 1, 1, 0, 3, 0, 0), new SACombination(1, 0, 1, 1, 0, 0, 0, 1), new SACombination(1, 0, 0, 1, 1, 1, 0, 0), new SACombination(1, 0, 0, 1, 0, 4, 0, 0),
+            new SACombination(1, 0, 0, 1, 0, 1, 0, 1), new SACombination(1, 0, 0, 0, 1, 1, 0, 0), new SACombination(2, 1, 1, 0, 0, 0, 0, 0), new SACombination(2, 1, 0, 0, 0, 1, 0, 0), new SACombination(2, 0, 2, 1, 0, 0, 0, 0),
+            new SACombination(2, 0, 1, 1, 0, 1, 0, 0), new SACombination(3, 0, 0, 1, 0, 0, 0, 0)};
 
         // Most values are accessed with 3-levels pointers and the second offset is different depending on the current mission.
         // All second offsets are stored here to be accessed according to the correct mission.
@@ -43,8 +44,7 @@ namespace HitmanStatistics
         float missionTime;
         bool isMissionActive;
         string gameName;
-        public int gameNumber;
-        int mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, currentShotsFired, HCpointerNumber;
+        int mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH;
 
 
         /*------------------
@@ -55,10 +55,8 @@ namespace HitmanStatistics
             InitializeComponent();
             imgSA = Properties.Resources.Yes;
             imgNotSA = Properties.Resources.No;
-            currentShotsFired = 0;
-            HCpointerNumber = 0;
-            gameNumber = 2;
-            gameName = "H2:SA";
+            gameName = "HITMAN 2";
+            ResetValues();
         }
 
         /*------------------
@@ -67,66 +65,61 @@ namespace HitmanStatistics
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Attempt to find if the game is currently running.
-            myProcess = Process.GetProcessesByName("hitman2");
+            if (myProcess == null || myProcess.Length == 0)
+            {
+                myProcess = Process.GetProcessesByName("hitman2");
+
+                if (myProcess.Length != 0)
+                {
+                    LB_Running.Text = gameName + " IS RUNNING";
+                    LB_Running.ForeColor = Color.Green;
+                    Timer.Interval = 50;
+                }
+            }
+                
 
 
             if (myProcess.Length != 0)
             {
-                // The game is running, ready for memory reading.
-                LB_Running.Text = gameName + " IS RUNNING";
-                LB_Running.ForeColor = Color.Green;
-                isMissionActive = true;
-
-                // Reading the raw name of the current mission as an array of bytes and converting it to a string.
                 byte[] mapBytes = null;
-                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble("hitman2", baseAddress + 0x002A6C5C, new int[2] { 0x98, 0xBC7 }));
+                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }));
 
 
                 string mapBytesStr = enc.GetString(mapBytes);
-
-                try
+                if (mapBytesStr == "\0\0\0\0\0\0\0\0")
                 {
-                    // Trying to get the clean mission name and the mission number from the dictionary.
+                    // The game is no longer running
+                    ResetGame();
+                }
+                else if (mapValues.ContainsKey(mapBytesStr))
+                {
+                    // Get the clean mission name and the mission number from the dictionary
+                    isMissionActive = true;
                     mapName = mapValues[mapBytesStr].Item1;
                     mapNumber = mapValues[mapBytesStr].Item2;
                 }
-                catch (KeyNotFoundException)
+                else
                 {
-                    // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment.
-                    // The current screen is something like the main menu, the briefing or a cutscene.
                     isMissionActive = false;
-                    currentShotsFired = 0;
-
-                    HCpointerNumber++;
-                    if (HCpointerNumber > 10)
-                        HCpointerNumber = 0;
                 }
 
                 if (isMissionActive) // A mission is currently active, ready to read memory.
                 {
-                    // Reading the timer and displaying it with 3 decimals.
-                    missionTime = Trainer.ReadPointerFloat("hitman2", baseAddress + 0x2A6C5C, new int[1] { 0x24 });
-                    LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
+                    missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x2A6C5C, new int[1] { 0x24 });
 
-                    // Reseting the number of shots fired while loading a game (the timer goes to 0 while loading)
-                    if (missionTime == 0)
-                        currentShotsFired = 0;
+                    if (missionTime > 0)
+                    {
+                        nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
+                        nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
+                        nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
+                        nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
+                        nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
+                        nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
+                        nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
+                        nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                    }
 
-                    // Reading the number of shots fired.
-                    // There's a glitch with this, it sometimes goes back to 0 for a few milliseconds, so I use another variable to store what was the value before so I can prevent it to change.
-                    nbShotsFired = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x00051A88, new int[3] { 0x34, 0x54, 0x11C7 });
-                    if (nbShotsFired > currentShotsFired && nbShotsFired <= currentShotsFired + 10)
-                        currentShotsFired = nbShotsFired;
 
-                    // Reading every other value
-                    nbCloseEncounters = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
-                    nbHeadshots = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
-                    nbAlerts = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
-                    nbEnemiesK = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
-                    nbEnemiesH = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
-                    nbInnocentsK = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
-                    nbInnocentsH = Trainer.ReadPointerInteger("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
-                    NB_ShotsFired.Text = currentShotsFired.ToString();
 
 
 
@@ -166,6 +159,15 @@ namespace HitmanStatistics
             }
         }
 
+        private void ResetGame()
+        {
+            myProcess = null;
+            LB_Running.Text = gameName + " IS NOT RUNNING";
+            LB_Running.ForeColor = Color.Red;
+            Timer.Interval = 500;
+            ResetValues();
+        }
+
 
         // Called when the game is not running or no mission is active.
         // Used to reset all the values.
@@ -201,7 +203,7 @@ namespace HitmanStatistics
             foreach (SACombination combination in validSACombination)
             {
                 // If all the current values are equal or inferior to a valid combination, the rating is SA
-                if(combination.isSACombination(currentShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH))
+                if (combination.isSACombination(nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH))
                 {
                     return true;
                 }
