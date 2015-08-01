@@ -18,7 +18,7 @@ namespace HitmanStatistics
         Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>() {
             { "00_main.", new Tuple<string, int>("Death of a Showman", 1) },          { "01_main.", new Tuple<string, int>("Vintage Year", 2) },     { "03_main.", new Tuple<string, int>("Curtains Down", 3) },     { "04_main.", new Tuple<string, int>("Flatline", 4) },             { "05_main.", new Tuple<string, int>("A New Life", 5) },
             { "06_main.", new Tuple<string, int>("The Murder of Crows", 6) },         { "02_main.", new Tuple<string, int>("You Better Watch Out", 7) },   { "08_main.", new Tuple<string, int>("Death of the Mississippi", 8) },      { "09_main.", new Tuple<string, int>("Till Death Do Us Part", 9) },         { "10_main.", new Tuple<string, int>("The House of Cards", 10) },
-            { "11_main.", new Tuple<string, int>("Dance with the Devil", 11) },   { "12_main.", new Tuple<string, int>("Amendment XXV", 12) },   { "13_main.", new Tuple<string, int>("Requiem", 13) }};
+            { "11_main.", new Tuple<string, int>("Dance with the Devil", 11) },   { "12_main.", new Tuple<string, int>("Amendment XXV", 12) },   { "13_main.", new Tuple<string, int>("Requiem", 13)}, { "ut/hideo", new Tuple<string, int>("WHAT THE FUCK?!", 99)}};
 
 
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
@@ -43,21 +43,29 @@ namespace HitmanStatistics
             imgNotSA = Properties.Resources.No;
             gameName = "H:BM";
             ResetValues();
+            NB_Witnessess.ForeColor = Color.Gray;
         }
         /*------------------
         -- MEMORY READING --
         ------------------*/
+        private void OccasionalProcessCheck_Tick(object sender, EventArgs e)
+        {
+            myProcess = Process.GetProcessesByName("HitmanBloodMoney");
+        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Attempt to find if the game is currently running
             if (myProcess == null || myProcess.Length == 0)
             {
+                OccasionalProcessCheck.Stop();
                 myProcess = Process.GetProcessesByName("HitmanBloodMoney");
 
                 if (myProcess.Length != 0)
                 {
                     LB_Running.Text = gameName + " IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
+                    OccasionalProcessCheck.Start();
                     Timer.Interval = 50;
                 }
             }
@@ -67,6 +75,7 @@ namespace HitmanStatistics
                 // Reading the raw name of the current mission as an array of bytes and converting it to a string.
                 byte[] mapBytes = null;
                 mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x000BF8E0, new int[2] { 0x7b8, 0x65c }));
+                    
                 string mapBytesStr = enc.GetString(mapBytes);
                 
                 if (mapValues.ContainsKey(mapBytesStr))
@@ -76,7 +85,7 @@ namespace HitmanStatistics
                     mapName = mapValues[mapBytesStr].Item1;
                     mapNumber = mapValues[mapBytesStr].Item2;
                 }
-                else
+                else if("nbloodmo" == mapBytesStr)
                 {
                     // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
                     // The current screen is something like the main menu, the briefing or a cutscene
@@ -93,8 +102,8 @@ namespace HitmanStatistics
                     nbGuardKills1 = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2578);
                     nbGuardKills2 = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2588);
                     nbCivilianKills = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2590);
-                    nbGuardsHarmed = Trainer.ReadInteger(myProcess, baseAddress + 0x5B258C);
-                    nbCiviliansHarmed = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2594);
+                    //nbGuardsHarmed = Trainer.ReadInteger(myProcess, baseAddress + 0x5B258C);
+                    //nbCiviliansHarmed = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2594);
                     nbShotsFired = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2554);
                     nbShotsHit = Trainer.ReadInteger(myProcess, baseAddress + 0x5B2558);
                     nbCloseCombatKills = Trainer.ReadInteger(myProcess, baseAddress + 0x5B25B0);
@@ -132,14 +141,16 @@ namespace HitmanStatistics
                         NB_TotalKills.Text = (nbTargetKills + nbGuardKills1 + nbGuardKills2 + nbCivilianKills + (nbGatorGangKills - nbGatorGangKills_zero)).ToString();
                     }
                     NB_ShotsFired.Text = nbShotsFired.ToString();
-                    NB_ShotsHit.Text = nbShotsHit.ToString();
                     NB_CloseEncounterKills.Text = nbCloseCombatKills.ToString();
+                    NB_ShotsHit.Text = nbShotsHit.ToString();
+                    //NB_EnemiesHarmed.Text = nbGuardsHarmed.ToString();
+                    //NB_CiviliansHarmed.Text = nbCiviliansHarmed.ToString();
                     NB_Accidents.Text = nbAccidents.ToString();
                     NB_Headshots.Text = nbHeadshots.ToString();
                     NB_BodiesFound.Text = (nbBodiesFoundTarget + nbBodiesFoundNonTarget).ToString();
                     NB_CoversBlown.Text = nbCoversBlown.ToString();
                     NB_Witnessess.Text = nbWitnesses.ToString();
-                    NB_Witnessess.ForeColor = Color.Gray;
+                    
                     if (nbSeenByACamera == 0)
                     {
                         NB_SeenByACamera.Text = "0";
@@ -153,6 +164,8 @@ namespace HitmanStatistics
                     ResetValues();
                 }
             }
+            else
+                ResetGame();
         }
 
         // Used to reset the current game
@@ -166,9 +179,10 @@ namespace HitmanStatistics
 
         private void ResetValues()
         {
+            isMissionActive = false;
             LB_Time.Text = "00:00,000";
 
-            LB_MapName.Text = "No mission currently";
+            LB_MapName.Text = "No mission currently running";
         }
 
         bool isSilentAssassinYet()

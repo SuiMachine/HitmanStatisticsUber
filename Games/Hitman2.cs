@@ -1,12 +1,8 @@
 ﻿using System;
+using System.Windows.Forms;
+using System.Drawing;
 using System.Diagnostics;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace HitmanStatistics
 {
@@ -34,8 +30,8 @@ namespace HitmanStatistics
             { "C3-1__MA", new Tuple<string, int>("Tracking Hayamoto", 6) },         { "\\C3-2a__", new Tuple<string, int>("Hidden Valley", 7) },            { "\\C3-2b__", new Tuple<string, int>("At the Gates", 8) },         { "C3-3__MA", new Tuple<string, int>("Shogun Showdown", 9) },               { "C4-1__MA", new Tuple<string, int>("Basement Killing", 10) },
             { "C4-2__MA", new Tuple<string, int>("The Graveyard Shift", 11) },      { "C4-3__MA", new Tuple<string, int>("The Jacuzzi Job", 12) },          { "C5-1__MA", new Tuple<string, int>("Murder At The Bazaar", 13) }, { "C5-2__MA", new Tuple<string, int>("The Motorcade Interception", 14) },   { "C5-3__MA", new Tuple<string, int>("Tunnel Rat", 15) },
             { "C6-1__MA", new Tuple<string, int>("Temple City Ambush", 16) },       { "C6-2__MA", new Tuple<string, int>("The Death of Hannelore", 17) },   { "C6-3__MA", new Tuple<string, int>("Terminal Hospitality", 18) }, { "C7-1__MA", new Tuple<string, int>("St. Petersburg Revisited", 19) },     { "C8-1__MA", new Tuple<string, int>("Redemption at Gontranno", 20) }};
-        
-        
+
+
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Image imgSA, imgNotSA;
@@ -55,7 +51,7 @@ namespace HitmanStatistics
             InitializeComponent();
             imgSA = Properties.Resources.Yes;
             imgNotSA = Properties.Resources.No;
-            gameName = "HITMAN 2";
+            gameName = "H2: SA";
             ResetValues();
         }
 
@@ -64,7 +60,7 @@ namespace HitmanStatistics
         ------------------*/
         private void Timer_Tick(object sender, EventArgs e)
         {
-            // Attempt to find if the game is currently running.
+            // Attempt to find if the game is currently running
             if (myProcess == null || myProcess.Length == 0)
             {
                 myProcess = Process.GetProcessesByName("hitman2");
@@ -76,16 +72,17 @@ namespace HitmanStatistics
                     Timer.Interval = 50;
                 }
             }
-                
-
 
             if (myProcess.Length != 0)
             {
+                // Reading the raw name of the current mission as an array of bytes and converting it to a string
                 byte[] mapBytes = null;
+
                 mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }));
 
 
                 string mapBytesStr = enc.GetString(mapBytes);
+
                 if (mapBytesStr == "\0\0\0\0\0\0\0\0")
                 {
                     // The game is no longer running
@@ -100,13 +97,18 @@ namespace HitmanStatistics
                 }
                 else
                 {
+                    // The mission name isn't included in the dictionary, meaning that a mission is not active at this moment
+                    // The current screen is something like the main menu, the briefing or a cutscene
                     isMissionActive = false;
                 }
 
-                if (isMissionActive) // A mission is currently active, ready to read memory.
+                if (isMissionActive)
                 {
+                    // A mission is currently active, ready to read memory
+                    // Reading the timer
                     missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x2A6C5C, new int[1] { 0x24 });
 
+                    // Reading every other value if the mission has started
                     if (missionTime > 0)
                     {
                         nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
@@ -119,12 +121,8 @@ namespace HitmanStatistics
                         nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
                     }
 
-
-
-
-
                     // Checking if the actual rating is SA according to the current stats
-                    if (SilentAssassin())
+                    if (IsSilentAssassin())
                     {
                         IMG_SA.BackgroundImage = imgSA;
                         LB_SilentAssassin.ForeColor = Color.Green;
@@ -137,6 +135,8 @@ namespace HitmanStatistics
 
                     // Displaying the values
                     LB_MapName.Text = "#" + mapNumber + " " + mapName;
+                    LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
+                    NB_ShotsFired.Text = nbShotsFired.ToString();
                     NB_CloseEncounters.Text = nbCloseEncounters.ToString();
                     NB_Headshots.Text = nbHeadshots.ToString();
                     NB_Alerts.Text = nbAlerts.ToString();
@@ -145,20 +145,16 @@ namespace HitmanStatistics
                     NB_InnocentsKilled.Text = nbInnocentsK.ToString();
                     NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
                 }
-                else // No mission is active, reseting values.
+                else
                 {
+                    // No mission is active, reseting values
                     ResetValues();
                 }
             }
-            else
-            {
-                // The game process has not been found, reseting values.
-                LB_Running.Text = gameName + " IS NOT RUNNING";
-                LB_Running.ForeColor = Color.Red;
-                ResetValues();
-            }
         }
 
+
+        // Used to reset the current game
         private void ResetGame()
         {
             myProcess = null;
@@ -173,16 +169,25 @@ namespace HitmanStatistics
         // Used to reset all the values.
         private void ResetValues()
         {
-            LB_Time.Text = "00:00,000";
-
+            isMissionActive = false;
             LB_MapName.Text = "No mission currently";
+            missionTime = 0;
+            LB_Time.Text = "00:00,000";
+            nbShotsFired = 0;
             NB_ShotsFired.Text = "0";
+            nbCloseEncounters = 0;
             NB_CloseEncounters.Text = "0";
+            nbHeadshots = 0;
             NB_Headshots.Text = "0";
+            nbAlerts = 0;
             NB_Alerts.Text = "0";
+            nbEnemiesK = 0;
             NB_EnemiesKilled.Text = "0";
+            nbEnemiesH = 0;
             NB_EnemiesHarmed.Text = "0";
+            nbInnocentsK = 0;
             NB_InnocentsKilled.Text = "0";
+            nbInnocentsH = 0;
             NB_InnocentsHarmed.Text = "0";
 
             if (IMG_SA.BackgroundImage != imgSA)
@@ -193,12 +198,11 @@ namespace HitmanStatistics
         }
 
         // Used to check if the actual rating is Silent Assassin
-        private bool SilentAssassin()
+        private bool IsSilentAssassin()
         {
             SACombination[] validSACombination = null;
-
             validSACombination = validSACombinationH2;
-
+            
             // Checking every possible SA combination
             foreach (SACombination combination in validSACombination)
             {

@@ -58,6 +58,7 @@
             this.NB_ShotsHit = new System.Windows.Forms.Label();
             this.NB_Accidents = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.OccasionalProcessCheck = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // LB_Time
@@ -362,6 +363,11 @@
             this.label4.TabIndex = 102;
             this.label4.Text = "Accidents";
             // 
+            // OccasionalProcessCheck
+            // 
+            this.OccasionalProcessCheck.Interval = 1000;
+            this.OccasionalProcessCheck.Tick += new System.EventHandler(this.OccasionalProcessCheck_Tick);
+            // 
             // HitmanBloodMoney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,7 +401,7 @@
             this.Controls.Add(this.LB_Timer);
             this.Controls.Add(this.LB_MapName);
             this.Name = "HitmanBloodMoney";
-            this.Size = new System.Drawing.Size(302, 349);
+            this.Size = new System.Drawing.Size(302, 348);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,6 +438,7 @@
         private System.Windows.Forms.Label NB_ShotsHit;
         private System.Windows.Forms.Label NB_Accidents;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer OccasionalProcessCheck;
 
     }
 }
