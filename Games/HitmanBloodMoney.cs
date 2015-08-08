@@ -150,6 +150,7 @@ namespace HitmanStatistics
                     NB_BodiesFound.Text = (nbBodiesFoundTarget + nbBodiesFoundNonTarget).ToString();
                     NB_CoversBlown.Text = nbCoversBlown.ToString();
                     NB_Witnessess.Text = nbWitnesses.ToString();
+                    L_Kills.Text = "Total Kills (T:"+nbTargetKills.ToString()+" / G:" + (nbGuardKills1+nbGuardKills2).ToString() + " / C:" + nbCivilianKills.ToString() + ")";
                     
                     if (nbSeenByACamera == 0)
                     {

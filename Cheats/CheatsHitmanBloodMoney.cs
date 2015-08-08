@@ -39,25 +39,21 @@ namespace CheatsForms
 
         private void CheckIfRunning_Tick(object sender, EventArgs e)
         {
-            if (myProcess == null || myProcess.Length == 0)
-            {
-                myProcess = Process.GetProcessesByName("HitmanBloodMoney");
-
-                if (myProcess.Length != 0)
-                {
-                    L_GameRunning.Text = "Blood Money is running";
-                    L_GameRunning.ForeColor = Color.Green;
-                    CheckIfRunning.Interval = 50;
-                }
-            }
-
+            myProcess = Process.GetProcessesByName("HitmanBloodMoney");
 
             if (myProcess.Length > 0)
             {
+                L_GameRunning.Text = "Blood Money is running";
+                L_GameRunning.ForeColor = Color.Green;
+                CheckIfRunning.Interval = 50;
                 foundProcess = true;
             }
             else
+            {
                 foundProcess = false;
+                CheckIfRunning.Interval = 500;
+            }
+
 
             if(foundProcess)
             {

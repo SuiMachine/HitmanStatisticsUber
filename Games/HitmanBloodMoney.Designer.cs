@@ -50,7 +50,7 @@
             this.LB_InnocentsKilled = new System.Windows.Forms.Label();
             this.LB_Headshots = new System.Windows.Forms.Label();
             this.NB_SeenByACamera = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.L_Kills = new System.Windows.Forms.Label();
             this.NB_TotalKills = new System.Windows.Forms.Label();
             this.IMG_SA = new System.Windows.Forms.Panel();
             this.LB_SilentAssassin = new System.Windows.Forms.Label();
@@ -278,15 +278,15 @@
             this.NB_SeenByACamera.Tag = "Value";
             this.NB_SeenByACamera.Text = "0";
             // 
-            // label1
+            // L_Kills
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(46, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 20);
-            this.label1.TabIndex = 96;
-            this.label1.Text = "Total Kills";
+            this.L_Kills.AutoSize = true;
+            this.L_Kills.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.L_Kills.Location = new System.Drawing.Point(46, 99);
+            this.L_Kills.Name = "L_Kills";
+            this.L_Kills.Size = new System.Drawing.Size(75, 20);
+            this.L_Kills.TabIndex = 96;
+            this.L_Kills.Text = "Total Kills";
             // 
             // NB_TotalKills
             // 
@@ -378,7 +378,7 @@
             this.Controls.Add(this.NB_ShotsHit);
             this.Controls.Add(this.IMG_SA);
             this.Controls.Add(this.LB_SilentAssassin);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.L_Kills);
             this.Controls.Add(this.NB_TotalKills);
             this.Controls.Add(this.LB_ShotsFired);
             this.Controls.Add(this.NB_ShotsFired);
@@ -430,7 +430,7 @@
         private System.Windows.Forms.Label LB_InnocentsKilled;
         private System.Windows.Forms.Label LB_Headshots;
         private System.Windows.Forms.Label NB_SeenByACamera;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label L_Kills;
         private System.Windows.Forms.Label NB_TotalKills;
         private System.Windows.Forms.Panel IMG_SA;
         private System.Windows.Forms.Label LB_SilentAssassin;
