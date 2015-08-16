@@ -20,6 +20,7 @@ namespace CheatsForms
         bool isSteam = false;
         int ActivateAdressRetail = 0x8ACA89;
         int ActivateAdressSteam = 0x8ABA89;
+        int SavedFilesValue = 0;
 
         public CheatsHitmanBloodMoney()
         {
@@ -38,14 +39,21 @@ namespace CheatsForms
 
         private void CheckIfRunning_Tick(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
+            myProcess = Process.GetProcessesByName("HitmanBloodMoney");
 
             if (myProcess.Length > 0)
             {
+                L_GameRunning.Text = "Blood Money is running";
+                L_GameRunning.ForeColor = Color.Green;
+                CheckIfRunning.Interval = 50;
                 foundProcess = true;
             }
             else
+            {
                 foundProcess = false;
+                CheckIfRunning.Interval = 500;
+            }
+
 
             if(foundProcess)
             {
@@ -65,9 +73,9 @@ namespace CheatsForms
             {
                 CheckIfSteam();
                 if (isSteam)
-                    Trainer.WriteByte(processName, ActivateAdressSteam, 1);
+                    Trainer.WriteByte(myProcess, ActivateAdressSteam, 1);
                 else
-                    Trainer.WriteByte(processName, ActivateAdressRetail, 1);
+                    Trainer.WriteByte(myProcess, ActivateAdressRetail, 1);
             }
         }
 
@@ -77,9 +85,9 @@ namespace CheatsForms
             {
                 CheckIfSteam();
                 if (isSteam)
-                    Trainer.WriteByte(processName, ActivateAdressSteam, 0);
+                    Trainer.WriteByte(myProcess, ActivateAdressSteam, 0);
                 else
-                    Trainer.WriteByte(processName, ActivateAdressRetail, 0);
+                    Trainer.WriteByte(myProcess, ActivateAdressRetail, 0);
             }
         }
 
@@ -91,6 +99,32 @@ namespace CheatsForms
                 isSteam = true;
             else
                 isSteam = false;
+        }
+
+        private void TB_AmountOfSaves_TextChanged(object sender, EventArgs e)
+        {
+            var value = 0;
+            if (int.TryParse(TB_AmountOfSaves.Text, out value))
+            {
+                SavedFilesValue = value;
+            }
+        }
+
+        private void B_ReadSaveFiles_Click(object sender, EventArgs e)
+        {
+            if(foundProcess)
+            {
+                SavedFilesValue = Trainer.ReadInteger(myProcess, 0x009B209C);
+                TB_AmountOfSaves.Text = SavedFilesValue.ToString();
+            }
+        }
+
+        private void B_WriteAValue_Click(object sender, EventArgs e)
+        {
+            if(foundProcess)
+            {
+                Trainer.WriteInteger(myProcess, 0x009B209C, SavedFilesValue);
+            }
         }
     }
 }

@@ -97,6 +97,24 @@
     <Compile Include="Cheats\CheatsHitmanBloodMoney.Designer.cs">
       <DependentUpon>CheatsHitmanBloodMoney.cs</DependentUpon>
     </Compile>
+    <Compile Include="Games\Hitman2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Games\Hitman2.Designer.cs">
+      <DependentUpon>Hitman2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\HitmanContracts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Games\HitmanContracts.Designer.cs">
+      <DependentUpon>HitmanContracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\HitmanBloodMoney.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Games\HitmanBloodMoney.Designer.cs">
+      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="Metronome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +138,12 @@
     </Compile>
     <Compile Include="SACombination.cs" />
     <Compile Include="Trainer.cs" />
+    <Compile Include="Initial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Initial.Designer.cs">
+      <DependentUpon>Initial.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Cheats\CheatsHitman2.resx">
       <DependentUpon>CheatsHitman2.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,6 +152,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Games\Hitman2.resx">
+      <DependentUpon>Hitman2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Games\HitmanContracts.resx">
+      <DependentUpon>HitmanContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Games\HitmanBloodMoney.resx">
+      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Initial.resx">
+      <DependentUpon>Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Metronome.resx">
       <DependentUpon>Metronome.cs</DependentUpon>
