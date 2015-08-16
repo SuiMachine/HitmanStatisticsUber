@@ -152,9 +152,9 @@
             this.LB_CloseEncountersKills.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_CloseEncountersKills.Location = new System.Drawing.Point(46, 159);
             this.LB_CloseEncountersKills.Name = "LB_CloseEncountersKills";
-            this.LB_CloseEncountersKills.Size = new System.Drawing.Size(162, 20);
+            this.LB_CloseEncountersKills.Size = new System.Drawing.Size(135, 20);
             this.LB_CloseEncountersKills.TabIndex = 82;
-            this.LB_CloseEncountersKills.Text = "Close encounters kills";
+            this.LB_CloseEncountersKills.Text = "Close combat kills";
             // 
             // NB_CloseEncounterKills
             // 

@@ -189,7 +189,7 @@ namespace HitmanStatistics
         bool isSilentAssassinYet()
         {
             bool sarating;
-            if (nbSeenByACamera != 0 || nbCoversBlown != 0 || nbGuardKills1 != 0 || nbGuardKills2 != 0 || nbCivilianKills != 0 || nbGuardsHarmed != 0 || nbCiviliansHarmed != 0)
+            if (nbSeenByACamera != 0 || nbCoversBlown != 0 || nbGuardKills1 != 0 || nbGuardKills2 != 0 || nbCivilianKills != 0 || nbGuardsHarmed != 0 || nbCiviliansHarmed != 0 || nbBodiesFoundTarget != 0 || nbBodiesFoundTarget != 0)
                 sarating = false;
             else
                 sarating = true;
