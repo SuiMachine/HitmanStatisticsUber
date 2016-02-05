@@ -42,6 +42,7 @@
             this.bloodMoneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisplayPanel = new System.Windows.Forms.Panel();
+            this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +92,8 @@
             // 
             this.uberToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cheatsToolStripMenuItem,
-            this.metronomeToolStripMenuItem});
+            this.metronomeToolStripMenuItem,
+            this.darkToolStripMenuItem});
             this.uberToolStripMenuItem.Name = "uberToolStripMenuItem";
             this.uberToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.uberToolStripMenuItem.Text = "Uber";
@@ -104,7 +106,7 @@
             this.contractsToolStripMenuItem,
             this.bloodMoneyToolStripMenuItem});
             this.cheatsToolStripMenuItem.Name = "cheatsToolStripMenuItem";
-            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cheatsToolStripMenuItem.Text = "Cheats";
             // 
             // codename47ToolStripMenuItem
@@ -138,7 +140,7 @@
             // metronomeToolStripMenuItem
             // 
             this.metronomeToolStripMenuItem.Name = "metronomeToolStripMenuItem";
-            this.metronomeToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.metronomeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.metronomeToolStripMenuItem.Text = "Metronome";
             this.metronomeToolStripMenuItem.Click += new System.EventHandler(this.metronomeToolStripMenuItem_Click);
             // 
@@ -150,6 +152,14 @@
             this.DisplayPanel.Name = "DisplayPanel";
             this.DisplayPanel.Size = new System.Drawing.Size(291, 0);
             this.DisplayPanel.TabIndex = 0;
+            // 
+            // darkToolStripMenuItem
+            // 
+            this.darkToolStripMenuItem.CheckOnClick = true;
+            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.darkToolStripMenuItem.Text = "Dark Mode";
+            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -187,6 +197,7 @@
         private System.Windows.Forms.ToolStripMenuItem bloodMoneyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hitmanBloodMoneyToolStripMenuItem;
         private System.Windows.Forms.Panel DisplayPanel;
+        private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
     }
 }
 

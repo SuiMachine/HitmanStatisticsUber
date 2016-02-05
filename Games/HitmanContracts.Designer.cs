@@ -91,7 +91,7 @@
             this.LB_Running.Name = "LB_Running";
             this.LB_Running.Size = new System.Drawing.Size(302, 24);
             this.LB_Running.TabIndex = 62;
-            this.LB_Running.Text = "HC";
+            this.LB_Running.Text = "H:C IS NOT RUNNING";
             this.LB_Running.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // NB_ShotsFired

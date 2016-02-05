@@ -40,7 +40,7 @@
             // 
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 310F));
             this.tableLayoutPanel1.Controls.Add(this.B_HitmanBloodMoney, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.B_HitmanContracts, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
@@ -59,7 +59,7 @@
             // B_HitmanBloodMoney
             // 
             this.B_HitmanBloodMoney.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.B_HitmanBloodMoney.Location = new System.Drawing.Point(88, 125);
+            this.B_HitmanBloodMoney.Location = new System.Drawing.Point(89, 125);
             this.B_HitmanBloodMoney.Name = "B_HitmanBloodMoney";
             this.B_HitmanBloodMoney.Size = new System.Drawing.Size(134, 42);
             this.B_HitmanBloodMoney.TabIndex = 3;
@@ -70,7 +70,7 @@
             // B_HitmanContracts
             // 
             this.B_HitmanContracts.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.B_HitmanContracts.Location = new System.Drawing.Point(88, 76);
+            this.B_HitmanContracts.Location = new System.Drawing.Point(89, 76);
             this.B_HitmanContracts.Name = "B_HitmanContracts";
             this.B_HitmanContracts.Size = new System.Drawing.Size(134, 42);
             this.B_HitmanContracts.TabIndex = 2;
@@ -92,7 +92,7 @@
             // B_Hitman2
             // 
             this.B_Hitman2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.B_Hitman2.Location = new System.Drawing.Point(88, 27);
+            this.B_Hitman2.Location = new System.Drawing.Point(89, 27);
             this.B_Hitman2.Name = "B_Hitman2";
             this.B_Hitman2.Size = new System.Drawing.Size(134, 42);
             this.B_Hitman2.TabIndex = 1;
