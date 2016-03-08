@@ -109,12 +109,6 @@
     <Compile Include="Games\HitmanContracts.Designer.cs">
       <DependentUpon>HitmanContracts.cs</DependentUpon>
     </Compile>
-    <Compile Include="Games\HitmanBloodMoney.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Games\HitmanBloodMoney.Designer.cs">
-      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
-    </Compile>
     <Compile Include="Metronome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,9 +152,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Games\HitmanContracts.resx">
       <DependentUpon>HitmanContracts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Games\HitmanBloodMoney.resx">
-      <DependentUpon>HitmanBloodMoney.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Initial.resx">
       <DependentUpon>Initial.cs</DependentUpon>
