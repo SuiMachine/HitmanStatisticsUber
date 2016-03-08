@@ -28,9 +28,16 @@ namespace HitmanStatistics
             _main.setFormTo(3);
         }
 
-        private void B_HitmanBloodMoney_Click(object sender, EventArgs e)
+        public void isDark()
         {
-            _main.setFormTo(4);
+            this.BackColor = Color.FromArgb(15, 15, 15);
+            this.label1.ForeColor = Color.Silver;
+            this.B_Hitman2.BackColor = Color.FromArgb(30, 30, 30);
+            this.B_Hitman2.ForeColor = Color.Red;
+            this.B_Hitman2.FlatStyle = FlatStyle.Flat;
+            this.B_HitmanContracts.BackColor = Color.FromArgb(30, 30, 30);
+            this.B_HitmanContracts.ForeColor = Color.Red;
+            this.B_HitmanContracts.FlatStyle = FlatStyle.Flat;
         }
     }
 }

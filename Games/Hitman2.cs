@@ -214,5 +214,58 @@ namespace HitmanStatistics
             }
             return false;
         }
+
+        public void isDark()
+        {
+            this.BackColor = Color.FromArgb(15, 15, 15);
+            this.LB_MapName.ForeColor = Color.Silver;
+            this.LB_Time.ForeColor = Color.WhiteSmoke;
+            this.LB_Timer.ForeColor = Color.DarkRed;
+
+            this.LB_ShotsFired.ForeColor = Color.WhiteSmoke;
+            this.LB_CloseEncounters.ForeColor = Color.WhiteSmoke;
+            this.LB_Headshots.ForeColor = Color.WhiteSmoke;
+            this.LB_Alerts.ForeColor = Color.WhiteSmoke;
+            this.LB_EnemiesKilled.ForeColor = Color.WhiteSmoke;
+            this.LB_EnemiesHarmed.ForeColor = Color.WhiteSmoke;
+            this.LB_InnocentsHarmed.ForeColor = Color.WhiteSmoke;
+            this.LB_InnocentsKilled.ForeColor = Color.WhiteSmoke;
+
+            this.NB_ShotsFired.ForeColor = Color.DarkRed;
+            this.NB_CloseEncounters.ForeColor = Color.DarkRed;
+            this.NB_Headshots.ForeColor = Color.DarkRed;
+            this.NB_Alerts.ForeColor = Color.DarkRed;
+            this.NB_EnemiesKilled.ForeColor = Color.DarkRed;
+            this.NB_EnemiesHarmed.ForeColor = Color.DarkRed;
+            this.NB_InnocentsHarmed.ForeColor = Color.DarkRed;
+            this.NB_InnocentsKilled.ForeColor = Color.DarkRed;
+        }
+
+
+        public void isNormal()
+        {
+            this.BackColor = Color.WhiteSmoke;
+            this.LB_MapName.ForeColor = Color.Black;
+            this.LB_Time.ForeColor = Color.DarkGray;
+            this.LB_Timer.ForeColor = Color.Black;
+
+            this.LB_ShotsFired.ForeColor = Color.Black;
+            this.LB_CloseEncounters.ForeColor = Color.Black;
+            this.LB_Headshots.ForeColor = Color.Black;
+            this.LB_Alerts.ForeColor = Color.Black;
+            this.LB_EnemiesKilled.ForeColor = Color.Black;
+            this.LB_EnemiesHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsKilled.ForeColor = Color.Black;
+
+            this.NB_ShotsFired.ForeColor = Color.Blue;
+            this.NB_CloseEncounters.ForeColor = Color.Blue;
+            this.NB_Headshots.ForeColor = Color.Blue;
+            this.NB_Alerts.ForeColor = Color.Blue;
+            this.NB_EnemiesKilled.ForeColor = Color.Blue;
+            this.NB_EnemiesHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsKilled.ForeColor = Color.Blue;
+        }
     }
 }

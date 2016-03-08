@@ -39,7 +39,7 @@ namespace CheatsForms
 
         private void CheckIfRunning_Tick(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName("HitmanBloodMoney");
+            myProcess = Process.GetProcessesByName(processName);
 
             if (myProcess.Length > 0)
             {

@@ -21,10 +21,6 @@ namespace HitmanStatistics
             new SACombination(1, 0, 0, 1, 0, 4, 0, 0),      new SACombination(0, 1, 0, 0, 1, 2, 0, 0), new SACombination(0, 1, 0, 0, 0, 5, 0, 0), new SACombination(0, 0, 0, 1, 1, 3, 0, 0), new SACombination(0, 0, 0, 1, 2, 0, 0, 0),
             new SACombination(0, 0, 0, 1, 0, 6, 0, 0)};
 
-        // Most values are accessed with 3-levels pointers and the second offset is different depending on the current mission.
-        // All second offsets are stored here to be accessed according to the correct mission.
-        int[] secondOffset = { 0x838, 0xB24, 0x8A0, 0x138, 0xB88, 0xBB8, 0xB48, 0xCE8, 0x136C, 0xAD0, 0xF50, 0x8D4, 0x9EC, 0x400, 0x9EC, 0x644, 0xB08, 0x96C, 0xB00, 0x8 };
-
         // Dictionary used to convert the raw map names into easily readable names and a map number to access the second offsets declared previously.
         Dictionary<string, Tuple<string, int>> mapValues = new Dictionary<string, Tuple<string, int>>(){
             // Hitman Contracts
@@ -37,6 +33,10 @@ namespace HitmanStatistics
             new Pointer(0x00393D58, new int[2] { 0x234, 0xBDE }), new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }), new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }), new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }), new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }), new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
             new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};
 
+        /*Pointer[] HCmapPointersGOG = {
+            new Pointer(0x003945B4, new int[3] { 0x33c, 0x684, 0x6 }), new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }), new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }), new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }), new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }), new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
+            new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};*/
+
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Image imgSA, imgNotSA;
@@ -46,6 +46,13 @@ namespace HitmanStatistics
         bool isMissionActive;
         string gameName;
         int mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
+        bool isGOG = false;
+
+        private enum ExpectedDLLSizes
+        {
+            Steam = 0,
+            GOG = 4997120,
+        }
 
          /*------------------
         -- INITIALIZATION --
@@ -72,6 +79,17 @@ namespace HitmanStatistics
 
                 if (myProcess.Length != 0)
                 {
+                    /*if (myProcess[0].MainModule.ModuleMemorySize == (int)ExpectedDLLSizes.GOG)
+                    {
+                        isGOG = true;
+                        Trace.WriteLine("Cought GOG H:C process.");
+                    }
+                    else
+                    {*/
+                        isGOG = false;
+                        Trace.WriteLine("Cought other (Steam?) process.");
+                    //}
+
                     LB_Running.Text = gameName + " IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
                     Timer.Interval = 50;
@@ -83,7 +101,10 @@ namespace HitmanStatistics
                 // Reading the raw name of the current mission as an array of bytes and converting it to a string
                 byte[] mapBytes = null;
 
-                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets));
+                /*if (isGOG)
+                    mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointersGOG[HCpointerNumber].address, HCmapPointersGOG[HCpointerNumber].offsets));
+                else*/
+                    mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets));
 
                 string mapBytesStr = enc.GetString(mapBytes);
 
@@ -112,7 +133,49 @@ namespace HitmanStatistics
                         HCpointerNumber = 0;
                 }
 
-                if (isMissionActive)
+                if (isMissionActive && isGOG)
+                {
+                    // Reading the timer
+                    missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x001CBA6C, new int[2] { 0x7b8, 0x24 });
+
+                    // Reading every other value if the mission has started
+                    if (missionTime > 0)
+                    {
+                        nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x00076A7C, new int[4] { 0xBA, 0x674, 0x78, 0xE14 });
+                        nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2F });
+                        nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB17 });
+                        nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2B });
+                        nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1F });
+                        nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1B });
+                        nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB27 });
+                        nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB23 });
+                    }
+
+                    // Checking if the actual rating is SA according to the current stats
+                    if (IsSilentAssassin())
+                    {
+                        IMG_SA.BackgroundImage = imgSA;
+                        LB_SilentAssassin.ForeColor = Color.Green;
+                    }
+                    else
+                    {
+                        IMG_SA.BackgroundImage = imgNotSA;
+                        LB_SilentAssassin.ForeColor = Color.Red;
+                    }
+
+                    // Displaying the values
+                    LB_MapName.Text = "#" + mapNumber + " " + mapName;
+                    LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
+                    NB_ShotsFired.Text = nbShotsFired.ToString();
+                    NB_CloseEncounters.Text = nbCloseEncounters.ToString();
+                    NB_Headshots.Text = nbHeadshots.ToString();
+                    NB_Alerts.Text = nbAlerts.ToString();
+                    NB_EnemiesKilled.Text = nbEnemiesK.ToString();
+                    NB_EnemiesHarmed.Text = nbEnemiesH.ToString();
+                    NB_InnocentsKilled.Text = nbInnocentsK.ToString();
+                    NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
+                }
+                else if(isMissionActive)
                 {
                     // Reading the timer
                     missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x39457C, new int[1] { 0x24 });
@@ -221,6 +284,58 @@ namespace HitmanStatistics
                 }
             }
             return false;
+        }
+
+        public void isDark()
+        {
+            this.BackColor = Color.FromArgb(15, 15, 15);
+            this.LB_MapName.ForeColor = Color.Silver;
+            this.LB_Time.ForeColor = Color.WhiteSmoke;
+            this.LB_Timer.ForeColor = Color.DarkRed;
+
+            this.LB_ShotsFired.ForeColor = Color.WhiteSmoke;
+            this.LB_CloseEncounters.ForeColor = Color.WhiteSmoke;
+            this.LB_Headshots.ForeColor = Color.WhiteSmoke;
+            this.LB_Alerts.ForeColor = Color.WhiteSmoke;
+            this.LB_EnemiesKilled.ForeColor = Color.WhiteSmoke;
+            this.LB_EnemiesHarmed.ForeColor = Color.WhiteSmoke;
+            this.LB_InnocentsHarmed.ForeColor = Color.WhiteSmoke;
+            this.LB_InnocentsKilled.ForeColor = Color.WhiteSmoke;
+
+            this.NB_ShotsFired.ForeColor = Color.DarkRed;
+            this.NB_CloseEncounters.ForeColor = Color.DarkRed;
+            this.NB_Headshots.ForeColor = Color.DarkRed;
+            this.NB_Alerts.ForeColor = Color.DarkRed;
+            this.NB_EnemiesKilled.ForeColor = Color.DarkRed;
+            this.NB_EnemiesHarmed.ForeColor = Color.DarkRed;
+            this.NB_InnocentsHarmed.ForeColor = Color.DarkRed;
+            this.NB_InnocentsKilled.ForeColor = Color.DarkRed;
+        }
+
+        public void isNormal()
+        {
+            this.BackColor = Color.WhiteSmoke;
+            this.LB_MapName.ForeColor = Color.Black;
+            this.LB_Time.ForeColor = Color.DarkGray;
+            this.LB_Timer.ForeColor = Color.Black;
+
+            this.LB_ShotsFired.ForeColor = Color.Black;
+            this.LB_CloseEncounters.ForeColor = Color.Black;
+            this.LB_Headshots.ForeColor = Color.Black;
+            this.LB_Alerts.ForeColor = Color.Black;
+            this.LB_EnemiesKilled.ForeColor = Color.Black;
+            this.LB_EnemiesHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsKilled.ForeColor = Color.Black;
+
+            this.NB_ShotsFired.ForeColor = Color.Blue;
+            this.NB_CloseEncounters.ForeColor = Color.Blue;
+            this.NB_Headshots.ForeColor = Color.Blue;
+            this.NB_Alerts.ForeColor = Color.Blue;
+            this.NB_EnemiesKilled.ForeColor = Color.Blue;
+            this.NB_EnemiesHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsKilled.ForeColor = Color.Blue;
         }
     }
 }
