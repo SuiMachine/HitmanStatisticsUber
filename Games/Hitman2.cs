@@ -240,5 +240,32 @@ namespace HitmanStatistics
             this.NB_InnocentsHarmed.ForeColor = Color.DarkRed;
             this.NB_InnocentsKilled.ForeColor = Color.DarkRed;
         }
+
+
+        public void isNormal()
+        {
+            this.BackColor = Color.WhiteSmoke;
+            this.LB_MapName.ForeColor = Color.Black;
+            this.LB_Time.ForeColor = Color.DarkGray;
+            this.LB_Timer.ForeColor = Color.Black;
+
+            this.LB_ShotsFired.ForeColor = Color.Black;
+            this.LB_CloseEncounters.ForeColor = Color.Black;
+            this.LB_Headshots.ForeColor = Color.Black;
+            this.LB_Alerts.ForeColor = Color.Black;
+            this.LB_EnemiesKilled.ForeColor = Color.Black;
+            this.LB_EnemiesHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsHarmed.ForeColor = Color.Black;
+            this.LB_InnocentsKilled.ForeColor = Color.Black;
+
+            this.NB_ShotsFired.ForeColor = Color.Blue;
+            this.NB_CloseEncounters.ForeColor = Color.Blue;
+            this.NB_Headshots.ForeColor = Color.Blue;
+            this.NB_Alerts.ForeColor = Color.Blue;
+            this.NB_EnemiesKilled.ForeColor = Color.Blue;
+            this.NB_EnemiesHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsHarmed.ForeColor = Color.Blue;
+            this.NB_InnocentsKilled.ForeColor = Color.Blue;
+        }
     }
 }

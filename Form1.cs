@@ -14,7 +14,6 @@ namespace HitmanStatistics
         Initial _initial;
         Hitman2 _hitman2;
         HitmanContracts _hitman3;
-        HitmanBloodMoney _hitmanbloodmoney;
         bool darkMode = false;
 
         // Other variables.
@@ -82,6 +81,7 @@ namespace HitmanStatistics
                 disposeOfUserControlsForms();
                 _hitman2 = new Hitman2();
                 if (darkMode) _hitman2.isDark();
+                else _hitman2.isNormal();
                 SetSizeBecauseIDK(_hitman2.Size.Width, _hitman2.Size.Height);
                 DisplayPanel.Controls.Add(_hitman2);
                 gameNumber = 2;
@@ -92,18 +92,10 @@ namespace HitmanStatistics
                 disposeOfUserControlsForms();
                 _hitman3 = new HitmanContracts();
                 if (darkMode) _hitman3.isDark();
+                else _hitman3.isNormal();
                 SetSizeBecauseIDK(_hitman3.Size.Width, _hitman3.Size.Height);
                 DisplayPanel.Controls.Add(_hitman3);
                 gameNumber = 3;
-            }
-            else if(i==4)
-            {
-                DisplayPanel.Controls.Clear();
-                disposeOfUserControlsForms();
-                _hitmanbloodmoney = new HitmanBloodMoney();
-                SetSizeBecauseIDK(_hitmanbloodmoney.Size.Width, _hitmanbloodmoney.Size.Height);
-                DisplayPanel.Controls.Add(_hitmanbloodmoney);
-                gameNumber = 4;
             }
         }
 
@@ -119,8 +111,6 @@ namespace HitmanStatistics
                 _hitman2.Dispose();
             if (_hitman3 != null)
                 _hitman3.Dispose();
-            if (_hitmanbloodmoney != null)
-                _hitmanbloodmoney.Dispose();
         }
 
         private void darkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -139,6 +129,8 @@ namespace HitmanStatistics
                 darkMode = false;
                 MainMenu.BackColor = Control.DefaultBackColor;
                 MainMenu.ForeColor = Control.DefaultForeColor;
+
+                setNormal();
             }
         }
 
@@ -150,6 +142,14 @@ namespace HitmanStatistics
                 _hitman3.isDark();
             else if (_initial != null)
                 _initial.isDark();
+        }
+
+        private void setNormal()
+        {
+            if (_hitman2 != null)
+                _hitman2.isNormal();
+            else if (_hitman3 != null)
+                _hitman3.isNormal();
         }
     }
 }

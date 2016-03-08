@@ -33,7 +33,6 @@
             this.Menu_Game = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Game_H2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Game_HC = new System.Windows.Forms.ToolStripMenuItem();
-            this.hitmanBloodMoneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cheatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.codename47ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,8 +40,8 @@
             this.contractsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bloodMoneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DisplayPanel = new System.Windows.Forms.Panel();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DisplayPanel = new System.Windows.Forms.Panel();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,8 +60,7 @@
             // 
             this.Menu_Game.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Game_H2,
-            this.Menu_Game_HC,
-            this.hitmanBloodMoneyToolStripMenuItem});
+            this.Menu_Game_HC});
             this.Menu_Game.Name = "Menu_Game";
             this.Menu_Game.Size = new System.Drawing.Size(50, 20);
             this.Menu_Game.Text = "Game";
@@ -80,13 +78,6 @@
             this.Menu_Game_HC.Size = new System.Drawing.Size(205, 22);
             this.Menu_Game_HC.Text = "Hitman: Contracts";
             this.Menu_Game_HC.Click += new System.EventHandler(this.Menu_Game_HC_Click);
-            // 
-            // hitmanBloodMoneyToolStripMenuItem
-            // 
-            this.hitmanBloodMoneyToolStripMenuItem.Name = "hitmanBloodMoneyToolStripMenuItem";
-            this.hitmanBloodMoneyToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.hitmanBloodMoneyToolStripMenuItem.Text = "Hitman: Blood Money";
-            this.hitmanBloodMoneyToolStripMenuItem.Click += new System.EventHandler(this.hitmanBloodMoneyToolStripMenuItem_Click);
             // 
             // uberToolStripMenuItem
             // 
@@ -144,6 +135,14 @@
             this.metronomeToolStripMenuItem.Text = "Metronome";
             this.metronomeToolStripMenuItem.Click += new System.EventHandler(this.metronomeToolStripMenuItem_Click);
             // 
+            // darkToolStripMenuItem
+            // 
+            this.darkToolStripMenuItem.CheckOnClick = true;
+            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.darkToolStripMenuItem.Text = "Dark Mode";
+            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
+            // 
             // DisplayPanel
             // 
             this.DisplayPanel.AutoSize = true;
@@ -153,19 +152,11 @@
             this.DisplayPanel.Size = new System.Drawing.Size(291, 0);
             this.DisplayPanel.TabIndex = 0;
             // 
-            // darkToolStripMenuItem
-            // 
-            this.darkToolStripMenuItem.CheckOnClick = true;
-            this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.darkToolStripMenuItem.Text = "Dark Mode";
-            this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 378);
+            this.ClientSize = new System.Drawing.Size(291, 165);
             this.Controls.Add(this.DisplayPanel);
             this.Controls.Add(this.MainMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -195,7 +186,6 @@
         private System.Windows.Forms.ToolStripMenuItem silentAssassinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contractsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bloodMoneyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hitmanBloodMoneyToolStripMenuItem;
         private System.Windows.Forms.Panel DisplayPanel;
         private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
     }

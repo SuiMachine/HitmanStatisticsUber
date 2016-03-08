@@ -28,11 +28,6 @@ namespace HitmanStatistics
             _main.setFormTo(3);
         }
 
-        private void B_HitmanBloodMoney_Click(object sender, EventArgs e)
-        {
-            _main.setFormTo(4);
-        }
-
         public void isDark()
         {
             this.BackColor = Color.FromArgb(15, 15, 15);
@@ -43,9 +38,6 @@ namespace HitmanStatistics
             this.B_HitmanContracts.BackColor = Color.FromArgb(30, 30, 30);
             this.B_HitmanContracts.ForeColor = Color.Red;
             this.B_HitmanContracts.FlatStyle = FlatStyle.Flat;
-            this.B_HitmanBloodMoney.BackColor = Color.FromArgb(30, 30, 30);
-            this.B_HitmanBloodMoney.ForeColor = Color.Red;
-            this.B_HitmanBloodMoney.FlatStyle = FlatStyle.Flat;
         }
     }
 }
