@@ -49,10 +49,7 @@ namespace HitmanStatistics
             setFormTo(3);
         }
 
-        private void hitmanBloodMoneyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            setFormTo(4);
-        }
+
 
         private void metronomeToolStripMenuItem_Click(object sender, EventArgs e)
         {

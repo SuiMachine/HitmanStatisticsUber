@@ -1,2 +1,4 @@
 bin/*
 obj/*
+.vs/*
+.vs/HitmanStatistics/v14/.suo

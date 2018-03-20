@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.B_HitmanContracts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.B_Hitman2 = new System.Windows.Forms.Button();
-            this.B_HitmanContracts = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,7 +39,7 @@
             // 
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 311F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 313F));
             this.tableLayoutPanel1.Controls.Add(this.B_HitmanContracts, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.B_Hitman2, 0, 1);
@@ -50,9 +50,19 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(311, 133);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(311, 130);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // B_HitmanContracts
+            // 
+            this.B_HitmanContracts.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.B_HitmanContracts.Location = new System.Drawing.Point(90, 80);
+            this.B_HitmanContracts.Name = "B_HitmanContracts";
+            this.B_HitmanContracts.Size = new System.Drawing.Size(134, 42);
+            this.B_HitmanContracts.TabIndex = 2;
+            this.B_HitmanContracts.Text = "Hitman: Contracts";
+            this.B_HitmanContracts.UseVisualStyleBackColor = true;
+            this.B_HitmanContracts.Click += new System.EventHandler(this.B_HitmanContracts_Click);
             // 
             // label1
             // 
@@ -68,7 +78,7 @@
             // B_Hitman2
             // 
             this.B_Hitman2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.B_Hitman2.Location = new System.Drawing.Point(89, 27);
+            this.B_Hitman2.Location = new System.Drawing.Point(90, 27);
             this.B_Hitman2.Name = "B_Hitman2";
             this.B_Hitman2.Size = new System.Drawing.Size(134, 42);
             this.B_Hitman2.TabIndex = 1;
@@ -76,24 +86,13 @@
             this.B_Hitman2.UseVisualStyleBackColor = true;
             this.B_Hitman2.Click += new System.EventHandler(this.B_Hitman2_Click);
             // 
-            // B_HitmanContracts
-            // 
-            this.B_HitmanContracts.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.B_HitmanContracts.Location = new System.Drawing.Point(89, 81);
-            this.B_HitmanContracts.Name = "B_HitmanContracts";
-            this.B_HitmanContracts.Size = new System.Drawing.Size(134, 42);
-            this.B_HitmanContracts.TabIndex = 2;
-            this.B_HitmanContracts.Text = "Hitman: Contracts";
-            this.B_HitmanContracts.UseVisualStyleBackColor = true;
-            this.B_HitmanContracts.Click += new System.EventHandler(this.B_HitmanContracts_Click);
-            // 
             // Initial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Initial";
-            this.Size = new System.Drawing.Size(311, 140);
+            this.Size = new System.Drawing.Size(311, 295);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
