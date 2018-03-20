@@ -42,7 +42,6 @@
             this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisplayPanel = new System.Windows.Forms.Panel();
-            this.alekhinesGunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,8 +60,7 @@
             // 
             this.Menu_Game.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Game_H2,
-            this.Menu_Game_HC,
-            this.alekhinesGunToolStripMenuItem});
+            this.Menu_Game_HC});
             this.Menu_Game.Name = "Menu_Game";
             this.Menu_Game.Size = new System.Drawing.Size(50, 20);
             this.Menu_Game.Text = "Game";
@@ -154,12 +152,6 @@
             this.DisplayPanel.Size = new System.Drawing.Size(291, 0);
             this.DisplayPanel.TabIndex = 0;
             // 
-            // alekhinesGunToolStripMenuItem
-            // 
-            this.alekhinesGunToolStripMenuItem.Name = "alekhinesGunToolStripMenuItem";
-            this.alekhinesGunToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
-            this.alekhinesGunToolStripMenuItem.Text = "Alekhine\'s Gun";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,7 +188,6 @@
         private System.Windows.Forms.ToolStripMenuItem bloodMoneyToolStripMenuItem;
         private System.Windows.Forms.Panel DisplayPanel;
         private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alekhinesGunToolStripMenuItem;
     }
 }
 
