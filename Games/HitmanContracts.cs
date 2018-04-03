@@ -86,8 +86,8 @@ namespace HitmanStatistics
                     }
                     else
                     {*/
-                        isGOG = false;
-                        Trace.WriteLine("Cought other (Steam?) process.");
+                    isGOG = false;
+                    Trace.WriteLine("Cought other (Steam?) process.");
                     //}
 
                     LB_Running.Text = gameName + " IS RUNNING";
@@ -95,6 +95,8 @@ namespace HitmanStatistics
                     Timer.Interval = 50;
                 }
             }
+            else if (myProcess.Length > 0 && myProcess[0].HasExited)
+                ResetGame();
 
             if (myProcess.Length != 0)
             {
@@ -108,12 +110,7 @@ namespace HitmanStatistics
 
                 string mapBytesStr = enc.GetString(mapBytes);
 
-                if (mapBytesStr == "\0\0\0\0\0\0\0\0")
-                {
-                    // The game is no longer running
-                    ResetGame();
-                }
-                else if (mapValues.ContainsKey(mapBytesStr))
+                if (mapValues.ContainsKey(mapBytesStr))
                 {
                     // Get the clean mission name and the mission number from the dictionary
                     isMissionActive = true;
