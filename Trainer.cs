@@ -106,17 +106,17 @@ public class Trainer
         }
         return Value;
     }
-    public static int ReadInteger(Process[] Proc, int Address)
+    public static int ReadInteger(Process Proc, int Address)
     {
         int Value = 0;
         checked
         {
             try
             {
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         ReadProcessMemoryInteger(Handle, Address, ref Value, 4, ref Bytes);
@@ -204,18 +204,17 @@ public class Trainer
         }
         return Value;
     }
-    public static int ReadPointerInteger(string EXENAME, int Pointer, int[] Offset)
+    public static int ReadPointerInteger(Process Proc, int Pointer, int[] Offset)
     {
         int Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         foreach (int i in Offset)
@@ -260,18 +259,17 @@ public class Trainer
         }
         return Value;
     }
-    public static float ReadPointerFloat(string EXENAME, int Pointer, int[] Offset)
+    public static float ReadPointerFloat(Process Proc, int Pointer, int[] Offset)
     {
         float Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         foreach (int i in Offset)
@@ -316,18 +314,17 @@ public class Trainer
         }
         return Value;
     }
-    public static double ReadPointerDouble(string EXENAME, int Pointer, int[] Offset)
+    public static double ReadPointerDouble(Process Proc, int Pointer, int[] Offset)
     {
         double Value = 0;
         checked
         {
             try
             {
-                Process[] Proc = Process.GetProcessesByName(EXENAME);
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         foreach (int i in Offset)
@@ -345,44 +342,17 @@ public class Trainer
         }
         return Value;
     }
-    public static double ReadPointerDouble(Process[] Proc, int Pointer, int[] Offset)
-    {
-        double Value = 0;
-        checked
-        {
-            try
-            {
-                if (Proc.Length != 0)
-                {
-                    int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
-                    if (Handle != 0)
-                    {
-                        foreach (int i in Offset)
-                        {
-                            ReadProcessMemoryInteger((int)Handle, Pointer, ref Pointer, 4, ref Bytes);
-                            Pointer += i;
-                        }
-                        ReadProcessMemoryDouble((int)Handle, Pointer, ref Value, 8, ref Bytes);
-                        CloseHandle(Handle);
-                    }
-                }
-            }
-            catch { }
-        }
-        return Value;
-    }
 
-    public static void WriteByte(Process[] Proc, int Address, byte Value)
+    public static void WriteByte(Process Proc, int Address, byte Value)
     {
         checked
         {
             try
             {
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         WriteProcessMemoryByte(Handle, Address, ref Value, 2, ref Bytes);
@@ -394,16 +364,16 @@ public class Trainer
             { }
         }
     }
-    public static void WriteInteger(Process[] Proc, int Address, int Value)
+    public static void WriteInteger(Process Proc, int Address, int Value)
     {
         checked
         {
             try
             {
-                if (Proc.Length != 0)
+                if (Proc != null)
                 {
                     int Bytes = 0;
-                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc[0].Id);
+                    int Handle = OpenProcess(PROCESS_ALL_ACCESS, 0, Proc.Id);
                     if (Handle != 0)
                     {
                         WriteProcessMemoryInteger(Handle, Address, ref Value, 4, ref Bytes);

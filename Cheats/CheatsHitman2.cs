@@ -16,7 +16,7 @@ namespace CheatsForms
         const int baseAddress = 0x00400000;
         String mapName;
         static string processName = "hitman2";
-        Process[] myProcess;
+        Process myProcess;
         bool foundProcess = false;
         bool isMissionActive;
         int mapNumber;
@@ -37,9 +37,9 @@ namespace CheatsForms
 
         private void B_SigScan_Click(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
+            myProcess = Process.GetProcessesByName(processName).FirstOrDefault();
 
-            if (myProcess.Length > 0)
+            if (myProcess != null)
             {
                 foundProcess = true;
             }
@@ -49,7 +49,7 @@ namespace CheatsForms
             if (foundProcess)
             {
                 byte[] mapBytes = null;
-                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble("hitman2", baseAddress + 0x002A6C5C, new int[2] { 0x98, 0xBC7 }));
+                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x002A6C5C, new int[2] { 0x98, 0xBC7 }));
                 string mapBytesStr = enc.GetString(mapBytes);
                 isMissionActive = true;
 
@@ -76,9 +76,9 @@ namespace CheatsForms
 
         private void B_WriteToMemory_Click(object sender, EventArgs e)
         {
-            myProcess = Process.GetProcessesByName(processName);
+            myProcess = Process.GetProcessesByName(processName).FirstOrDefault();
 
-            if (myProcess.Length > 0)
+            if (myProcess != null)
             {
                 foundProcess = true;
             }

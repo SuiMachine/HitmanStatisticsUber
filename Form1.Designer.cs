@@ -38,7 +38,6 @@
             this.codename47ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.silentAssassinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contractsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bloodMoneyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metronomeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.darkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisplayPanel = new System.Windows.Forms.Panel();
@@ -94,23 +93,22 @@
             this.cheatsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.codename47ToolStripMenuItem,
             this.silentAssassinToolStripMenuItem,
-            this.contractsToolStripMenuItem,
-            this.bloodMoneyToolStripMenuItem});
+            this.contractsToolStripMenuItem});
             this.cheatsToolStripMenuItem.Name = "cheatsToolStripMenuItem";
-            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.cheatsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cheatsToolStripMenuItem.Text = "Cheats";
             // 
             // codename47ToolStripMenuItem
             // 
             this.codename47ToolStripMenuItem.Enabled = false;
             this.codename47ToolStripMenuItem.Name = "codename47ToolStripMenuItem";
-            this.codename47ToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.codename47ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.codename47ToolStripMenuItem.Text = "Codename 47";
             // 
             // silentAssassinToolStripMenuItem
             // 
             this.silentAssassinToolStripMenuItem.Name = "silentAssassinToolStripMenuItem";
-            this.silentAssassinToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.silentAssassinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.silentAssassinToolStripMenuItem.Text = "Silent Assassin";
             this.silentAssassinToolStripMenuItem.Click += new System.EventHandler(this.silentAssassinToolStripMenuItem_Click);
             // 
@@ -118,20 +116,13 @@
             // 
             this.contractsToolStripMenuItem.Enabled = false;
             this.contractsToolStripMenuItem.Name = "contractsToolStripMenuItem";
-            this.contractsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.contractsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.contractsToolStripMenuItem.Text = "Contracts";
-            // 
-            // bloodMoneyToolStripMenuItem
-            // 
-            this.bloodMoneyToolStripMenuItem.Name = "bloodMoneyToolStripMenuItem";
-            this.bloodMoneyToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.bloodMoneyToolStripMenuItem.Text = "Blood Money";
-            this.bloodMoneyToolStripMenuItem.Click += new System.EventHandler(this.bloodMoneyToolStripMenuItem_Click);
             // 
             // metronomeToolStripMenuItem
             // 
             this.metronomeToolStripMenuItem.Name = "metronomeToolStripMenuItem";
-            this.metronomeToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.metronomeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.metronomeToolStripMenuItem.Text = "Metronome";
             this.metronomeToolStripMenuItem.Click += new System.EventHandler(this.metronomeToolStripMenuItem_Click);
             // 
@@ -139,7 +130,7 @@
             // 
             this.darkToolStripMenuItem.CheckOnClick = true;
             this.darkToolStripMenuItem.Name = "darkToolStripMenuItem";
-            this.darkToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.darkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.darkToolStripMenuItem.Text = "Dark Mode";
             this.darkToolStripMenuItem.Click += new System.EventHandler(this.darkToolStripMenuItem_Click);
             // 
@@ -185,7 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem codename47ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem silentAssassinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contractsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bloodMoneyToolStripMenuItem;
         private System.Windows.Forms.Panel DisplayPanel;
         private System.Windows.Forms.ToolStripMenuItem darkToolStripMenuItem;
     }

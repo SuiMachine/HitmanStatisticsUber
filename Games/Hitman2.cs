@@ -3,12 +3,19 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HitmanStatistics
 {
     public partial class Hitman2 : UserControl
     {
-        const int baseAddress = 0x00400000;
+        enum GameVersions
+        {
+            GOG = 3006464,
+            Steam
+        }
+
+        int baseAddress = 0x00400000;
 
         // All the possible Silent Assassin combinations for Hitman 2
         SACombination[] validSACombinationH2 = {
@@ -35,12 +42,14 @@ namespace HitmanStatistics
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Image imgSA, imgNotSA;
-        Process[] myProcess;
+        Process myProcess;
         String mapName;
         float missionTime;
         bool isMissionActive;
         string gameName;
         int mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH;
+
+        GameVersions currentGameVersion;
 
 
         /*------------------
@@ -61,34 +70,45 @@ namespace HitmanStatistics
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Attempt to find if the game is currently running
-            if (myProcess == null || myProcess.Length == 0)
+            if (myProcess == null)
             {
-                myProcess = Process.GetProcessesByName("hitman2");
+                myProcess = Process.GetProcessesByName("hitman2").FirstOrDefault();
 
-                if (myProcess.Length != 0)
+                if (myProcess != null)
                 {
                     LB_Running.Text = gameName + " IS RUNNING";
                     LB_Running.ForeColor = Color.Green;
+                    baseAddress = myProcess.MainModule.BaseAddress.ToInt32();
                     Timer.Interval = 50;
+                    if (myProcess.MainModule.ModuleMemorySize == (int)GameVersions.GOG)
+                        currentGameVersion = GameVersions.GOG;
+                    else
+                        currentGameVersion = GameVersions.Steam;
                 }
             }
-
-            if (myProcess.Length != 0)
+            else if (myProcess.HasExited)
+            {
+                ResetGame();
+            }
+            else
             {
                 // Reading the raw name of the current mission as an array of bytes and converting it to a string
                 byte[] mapBytes = null;
 
-                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }));
+                switch(currentGameVersion)
+                {
+                    case GameVersions.Steam:
+                        mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A6C5C, new int[2] { 0x98, 0xBC7 }));
+                        break;
+                    case GameVersions.GOG:
+                        mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x2A8C64, new int[2] { 0x98, 0xBC7 }));
+                        break;
+                }
 
 
                 string mapBytesStr = enc.GetString(mapBytes);
 
-                if (mapBytesStr == "\0\0\0\0\0\0\0\0")
-                {
-                    // The game is no longer running
-                    ResetGame();
-                }
-                else if (mapValues.ContainsKey(mapBytesStr))
+                if (mapValues.ContainsKey(mapBytesStr))
                 {
                     // Get the clean mission name and the mission number from the dictionary
                     isMissionActive = true;
@@ -106,19 +126,43 @@ namespace HitmanStatistics
                 {
                     // A mission is currently active, ready to read memory
                     // Reading the timer
-                    missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x2A6C5C, new int[1] { 0x24 });
+                    switch(currentGameVersion)
+                    {
+                        case GameVersions.Steam:
+                            missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x2A6C5C, new int[] { 0x24 });
+                            break;
+                        case GameVersions.GOG:
+                            missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x002A8C64, new int[] { 0x24 });
+                            break;
+                    }
 
                     // Reading every other value if the mission has started
                     if (missionTime > 0)
                     {
-                        nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[2] { 0xBD, 0x11C7 });
-                        nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x220 });
-                        nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x208 });
-                        nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x21C });
-                        nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x210 });
-                        nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x20C });
-                        nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x218 });
-                        nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                        switch(currentGameVersion)
+                        {
+                            case GameVersions.Steam:
+                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[] { 0xBD, 0x11C7 });
+                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x220 });
+                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x208 });
+                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x21C });
+                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x210 });
+                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x20C });
+                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x218 });
+                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                                break;
+                            case GameVersions.GOG:
+                                nbShotsFired = 0;//Trainer.ReadPointerInteger(myProcess, baseAddress + 0x28B68, new int[] { 0x5C0, 0x54, 0x34 });
+                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x220 });
+                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x208 });
+                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x21C });
+                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x210 });
+                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x20C });
+                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x218 });
+                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x214 });
+                                break;
+                        }
+
                     }
 
                     // Checking if the actual rating is SA according to the current stats

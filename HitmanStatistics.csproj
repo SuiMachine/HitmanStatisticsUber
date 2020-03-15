@@ -94,12 +94,6 @@
     <Compile Include="Cheats\CheatsHitman2.Designer.cs">
       <DependentUpon>CheatsHitman2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cheats\CheatsHitmanBloodMoney.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cheats\CheatsHitmanBloodMoney.Designer.cs">
-      <DependentUpon>CheatsHitmanBloodMoney.cs</DependentUpon>
-    </Compile>
     <Compile Include="Games\Hitman2.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -143,9 +137,7 @@
     </Compile>
     <EmbeddedResource Include="Cheats\CheatsHitman2.resx">
       <DependentUpon>CheatsHitman2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cheats\CheatsHitmanBloodMoney.resx">
-      <DependentUpon>CheatsHitmanBloodMoney.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -40,13 +40,12 @@ namespace HitmanStatistics
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Image imgSA, imgNotSA;
-        Process[] myProcess;
+        Process myProcess;
         String mapName;
         float missionTime;
         bool isMissionActive;
         string gameName;
         int mapNumber, nbShotsFired, nbCloseEncounters, nbHeadshots, nbAlerts, nbEnemiesK, nbEnemiesH, nbInnocentsK, nbInnocentsH, HCpointerNumber;
-        bool isGOG = false;
 
         private enum ExpectedDLLSizes
         {
@@ -73,40 +72,20 @@ namespace HitmanStatistics
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Attempt to find if the game is currently running
-            if (myProcess == null || myProcess.Length == 0)
+            if (myProcess == null)
             {
-                myProcess = Process.GetProcessesByName("HitmanContracts");
+                myProcess = Process.GetProcessesByName("HitmanContracts").FirstOrDefault();
 
-                if (myProcess.Length != 0)
-                {
-                    /*if (myProcess[0].MainModule.ModuleMemorySize == (int)ExpectedDLLSizes.GOG)
-                    {
-                        isGOG = true;
-                        Trace.WriteLine("Cought GOG H:C process.");
-                    }
-                    else
-                    {*/
-                    isGOG = false;
-                    Trace.WriteLine("Cought other (Steam?) process.");
-                    //}
-
-                    LB_Running.Text = gameName + " IS RUNNING";
-                    LB_Running.ForeColor = Color.Green;
-                    Timer.Interval = 50;
-                }
+                LB_Running.Text = gameName + " IS RUNNING";
+                LB_Running.ForeColor = Color.Green;
+                Timer.Interval = 50;
             }
-            else if (myProcess.Length > 0 && myProcess[0].HasExited)
+            else if (myProcess.HasExited)
                 ResetGame();
-
-            if (myProcess.Length != 0)
+            else
             {
                 // Reading the raw name of the current mission as an array of bytes and converting it to a string
-                byte[] mapBytes = null;
-
-                /*if (isGOG)
-                    mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointersGOG[HCpointerNumber].address, HCmapPointersGOG[HCpointerNumber].offsets));
-                else*/
-                    mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets));
+                byte[] mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointers[HCpointerNumber].address, HCmapPointers[HCpointerNumber].offsets));
 
                 string mapBytesStr = enc.GetString(mapBytes);
 
@@ -130,49 +109,8 @@ namespace HitmanStatistics
                         HCpointerNumber = 0;
                 }
 
-                if (isMissionActive && isGOG)
-                {
-                    // Reading the timer
-                    missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x001CBA6C, new int[2] { 0x7b8, 0x24 });
 
-                    // Reading every other value if the mission has started
-                    if (missionTime > 0)
-                    {
-                        nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x00076A7C, new int[4] { 0xBA, 0x674, 0x78, 0xE14 });
-                        nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2F });
-                        nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB17 });
-                        nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB2B });
-                        nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1F });
-                        nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB1B });
-                        nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB27 });
-                        nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB23 });
-                    }
-
-                    // Checking if the actual rating is SA according to the current stats
-                    if (IsSilentAssassin())
-                    {
-                        IMG_SA.BackgroundImage = imgSA;
-                        LB_SilentAssassin.ForeColor = Color.Green;
-                    }
-                    else
-                    {
-                        IMG_SA.BackgroundImage = imgNotSA;
-                        LB_SilentAssassin.ForeColor = Color.Red;
-                    }
-
-                    // Displaying the values
-                    LB_MapName.Text = "#" + mapNumber + " " + mapName;
-                    LB_Time.Text = ((int)missionTime / 60).ToString("D2") + ":" + (missionTime % 60).ToString("00.000");
-                    NB_ShotsFired.Text = nbShotsFired.ToString();
-                    NB_CloseEncounters.Text = nbCloseEncounters.ToString();
-                    NB_Headshots.Text = nbHeadshots.ToString();
-                    NB_Alerts.Text = nbAlerts.ToString();
-                    NB_EnemiesKilled.Text = nbEnemiesK.ToString();
-                    NB_EnemiesHarmed.Text = nbEnemiesH.ToString();
-                    NB_InnocentsKilled.Text = nbInnocentsK.ToString();
-                    NB_InnocentsHarmed.Text = nbInnocentsH.ToString();
-                }
-                else if(isMissionActive)
+                if(isMissionActive)
                 {
                     // Reading the timer
                     missionTime = Trainer.ReadPointerFloat(myProcess, baseAddress + 0x39457C, new int[1] { 0x24 });
