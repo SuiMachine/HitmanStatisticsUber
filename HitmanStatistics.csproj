@@ -72,9 +72,7 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -135,6 +133,7 @@
     <Compile Include="Initial.Designer.cs">
       <DependentUpon>Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="XMLSerialization.cs" />
     <EmbeddedResource Include="Cheats\CheatsHitman2.resx">
       <DependentUpon>CheatsHitman2.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -160,7 +159,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="app.manifest" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

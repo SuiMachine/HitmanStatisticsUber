@@ -259,7 +259,7 @@ namespace HitmanStatistics
             return false;
         }
 
-        public void isDark()
+        public void isDark(FontStorage fonts)
         {
             this.BackColor = Color.FromArgb(15, 15, 15);
             this.LB_MapName.ForeColor = Color.Silver;
@@ -283,12 +283,37 @@ namespace HitmanStatistics
             this.NB_EnemiesHarmed.ForeColor = Color.DarkRed;
             this.NB_InnocentsHarmed.ForeColor = Color.DarkRed;
             this.NB_InnocentsKilled.ForeColor = Color.DarkRed;
+
+            this.LB_MapName.Font = fonts.MapName;
+            this.LB_Time.Font = fonts.LevelTime;
+            this.LB_Timer.Font = fonts.TimerText;
+
+            this.LB_ShotsFired.Font = fonts.ValuesTextFont;
+            this.LB_CloseEncounters.Font = fonts.ValuesTextFont;
+            this.LB_Headshots.Font = fonts.ValuesTextFont;
+            this.LB_Alerts.Font = fonts.ValuesTextFont;
+            this.LB_EnemiesKilled.Font = fonts.ValuesTextFont;
+            this.LB_EnemiesHarmed.Font = fonts.ValuesTextFont;
+            this.LB_InnocentsHarmed.Font = fonts.ValuesTextFont;
+            this.LB_InnocentsKilled.Font = fonts.ValuesTextFont;
+
+            this.NB_ShotsFired.Font = fonts.ValuesFont;
+            this.NB_CloseEncounters.Font = fonts.ValuesFont;
+            this.NB_Headshots.Font = fonts.ValuesFont;
+            this.NB_Alerts.Font = fonts.ValuesFont;
+            this.NB_EnemiesKilled.Font = fonts.ValuesFont;
+            this.NB_EnemiesHarmed.Font = fonts.ValuesFont;
+            this.NB_InnocentsHarmed.Font = fonts.ValuesFont;
+            this.NB_InnocentsKilled.Font = fonts.ValuesFont;
+            this.LB_SilentAssassin.Font = fonts.SilentAssassin;
+
         }
 
 
-        public void isNormal()
+        public void isNormal(FontStorage fonts)
         {
             this.BackColor = Color.WhiteSmoke;
+            this.LB_MapName.ForeColor = 
             this.LB_MapName.ForeColor = Color.Black;
             this.LB_Time.ForeColor = Color.DarkGray;
             this.LB_Timer.ForeColor = Color.Black;
@@ -310,6 +335,29 @@ namespace HitmanStatistics
             this.NB_EnemiesHarmed.ForeColor = Color.Blue;
             this.NB_InnocentsHarmed.ForeColor = Color.Blue;
             this.NB_InnocentsKilled.ForeColor = Color.Blue;
+
+            this.LB_MapName.Font = fonts.MapName;
+            this.LB_Time.Font = fonts.LevelTime;
+            this.LB_Timer.Font = fonts.TimerText;
+
+            this.LB_ShotsFired.Font = fonts.ValuesTextFont;
+            this.LB_CloseEncounters.Font = fonts.ValuesTextFont;
+            this.LB_Headshots.Font = fonts.ValuesTextFont;
+            this.LB_Alerts.Font = fonts.ValuesTextFont;
+            this.LB_EnemiesKilled.Font = fonts.ValuesTextFont;
+            this.LB_EnemiesHarmed.Font = fonts.ValuesTextFont;
+            this.LB_InnocentsHarmed.Font = fonts.ValuesTextFont;
+            this.LB_InnocentsKilled.Font = fonts.ValuesTextFont;
+
+            this.NB_ShotsFired.Font = fonts.ValuesFont;
+            this.NB_CloseEncounters.Font = fonts.ValuesFont;
+            this.NB_Headshots.Font = fonts.ValuesFont;
+            this.NB_Alerts.Font = fonts.ValuesFont;
+            this.NB_EnemiesKilled.Font = fonts.ValuesFont;
+            this.NB_EnemiesHarmed.Font = fonts.ValuesFont;
+            this.NB_InnocentsHarmed.Font = fonts.ValuesFont;
+            this.NB_InnocentsKilled.Font = fonts.ValuesFont;
+            this.LB_SilentAssassin.Font = fonts.SilentAssassin;
         }
     }
 }

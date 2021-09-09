@@ -13,7 +13,7 @@ namespace HitmanStatistics
         Initial _initial;
         Hitman2 _hitman2;
         HitmanContracts _hitman3;
-        bool darkMode = false;
+        FontStorage fonts;
 
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
@@ -33,8 +33,14 @@ namespace HitmanStatistics
         {
             _initial = new Initial(this);
             _metronome = new Metronome(this);
+            fonts = XMLSerialization.ReadFromXMLFile<FontStorage>("HitmanStatisticsUber.xml");
             _hitman2cheats = new CheatsForms.CheatsHitman2();
             DisplayPanel.Controls.Add(_initial);
+            if (fonts.DarkMode)
+                setDark();
+            else
+                setNormal();
+            darkToolStripMenuItem.Checked = fonts.DarkMode;
         }
 
         private void Menu_Game_H2_Click(object sender, EventArgs e)
@@ -46,8 +52,6 @@ namespace HitmanStatistics
         {
             setFormTo(3);
         }
-
-
 
         private void metronomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -69,8 +73,10 @@ namespace HitmanStatistics
                 DisplayPanel.Controls.Clear();
                 disposeOfUserControlsForms();
                 _hitman2 = new Hitman2();
-                if (darkMode) _hitman2.isDark();
-                else _hitman2.isNormal();
+                if (fonts.DarkMode)
+                    _hitman2.isDark(fonts);
+                else
+                    _hitman2.isNormal(fonts);
                 SetSizeBecauseIDK(_hitman2.Size.Width, _hitman2.Size.Height);
                 DisplayPanel.Controls.Add(_hitman2);
                 gameNumber = 2;
@@ -80,8 +86,10 @@ namespace HitmanStatistics
                 DisplayPanel.Controls.Clear();
                 disposeOfUserControlsForms();
                 _hitman3 = new HitmanContracts();
-                if (darkMode) _hitman3.isDark();
-                else _hitman3.isNormal();
+                if (fonts.DarkMode)
+                    _hitman3.isDark(fonts);
+                else
+                    _hitman3.isNormal(fonts);
                 SetSizeBecauseIDK(_hitman3.Size.Width, _hitman3.Size.Height);
                 DisplayPanel.Controls.Add(_hitman3);
                 gameNumber = 3;
@@ -106,7 +114,6 @@ namespace HitmanStatistics
         {
             if (darkToolStripMenuItem.Checked)
             {
-                darkMode = true;
                 MainMenu.BackColor = Color.FromArgb(15, 15, 15);
                 MainMenu.ForeColor = Color.WhiteSmoke;
                 this.BackColor = Color.FromArgb(15, 15, 15);
@@ -115,7 +122,6 @@ namespace HitmanStatistics
             }
             else
             {
-                darkMode = false;
                 MainMenu.BackColor = Control.DefaultBackColor;
                 MainMenu.ForeColor = Control.DefaultForeColor;
 
@@ -123,22 +129,103 @@ namespace HitmanStatistics
             }
         }
 
+        private void RestartFont()
+		{
+            if (fonts.DarkMode)
+                setDark();
+            else
+                setNormal();
+		}
+
         private void setDark()
         {
             if (_hitman2 != null)
-                _hitman2.isDark();
+                _hitman2.isDark(fonts);
             else if (_hitman3 != null)
-                _hitman3.isDark();
+                _hitman3.isDark(fonts);
             else if (_initial != null)
                 _initial.isDark();
+            fonts.DarkMode = true;
         }
 
         private void setNormal()
         {
             if (_hitman2 != null)
-                _hitman2.isNormal();
+                _hitman2.isNormal(fonts);
             else if (_hitman3 != null)
-                _hitman3.isNormal();
+                _hitman3.isNormal(fonts);
+            fonts.DarkMode = false;
         }
-    }
+
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+            XMLSerialization.SaveObjectToXML(fonts, "HitmanStatisticsUber.xml");
+        }
+
+        private void levelNameFontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.MapName;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.MapName = dialog.Font;
+                RestartFont();
+            }
+        }
+
+        private void timerTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.TimerText;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.TimerText = dialog.Font;
+                RestartFont();
+            }
+        }
+
+        private void timerFontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.LevelTime;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.LevelTime = dialog.Font;
+                RestartFont();
+            }
+        }
+
+        private void valuesFontToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+            var dialog = new FontDialog();
+            dialog.Font = fonts.ValuesFont;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.ValuesFont = dialog.Font;
+                RestartFont();
+            }
+        }
+
+        private void valuesTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.ValuesTextFont;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.ValuesTextFont = dialog.Font;
+                RestartFont();
+            }
+        }
+
+		private void silentAssassinTextToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+            var dialog = new FontDialog();
+            dialog.Font = fonts.SilentAssassin;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.SilentAssassin = dialog.Font;
+                RestartFont();
+            }
+        }
+	}
 }
