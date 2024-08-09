@@ -142,7 +142,7 @@ namespace HitmanStatistics
                         switch(currentGameVersion)
                         {
                             case GameVersions.Steam:
-                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x39419, new int[] { 0xBD, 0x11C7 });
+                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x38974, new int[] { 0xF8C, 0x11C7 });
                                 nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x220 });
                                 nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x208 });
                                 nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x21C });
