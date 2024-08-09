@@ -37,3 +37,6 @@ Credits
 * Original version developed by [nvillemin](https://github.com/nvillemin/HitmanStatistics).
 * [SuicideMachine](http://www.twitch.tv/suicidemachine)
 * Metronome uses samples from Round Here - Synths, taken from [Looperman.com](http://www.looperman.com/loops/detail/82774/round-here-synths-by-jvil83-free-280bpm-trap-synth-loop).
+
+Additional contributions:
+* [Abdulsarhan](https://github.com/Abdulsarhan) - Pointer for shots fired in Hitman 2
