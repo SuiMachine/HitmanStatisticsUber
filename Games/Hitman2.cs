@@ -11,7 +11,7 @@ namespace HitmanStatistics
     {
         enum GameVersions
         {
-            GOG = 3006464,
+            GOG = 3076096,
             Steam
         }
 
