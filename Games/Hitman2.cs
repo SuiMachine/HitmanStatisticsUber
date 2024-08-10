@@ -152,7 +152,7 @@ namespace HitmanStatistics
                                 nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A6C50, new int[] { 0x28, secondOffset[mapNumber - 1], 0x214 });
                                 break;
                             case GameVersions.GOG:
-                                nbShotsFired = 0;//Trainer.ReadPointerInteger(myProcess, baseAddress + 0x28B68, new int[] { 0x5C0, 0x54, 0x34 });
+                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x0003E864, new int[] { 0x3C, 0x4 }); //shit pointer. Works only up to 64, and freaks out while it does it
                                 nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x220 });
                                 nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x208 });
                                 nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, secondOffset[mapNumber - 1], 0x21C });
