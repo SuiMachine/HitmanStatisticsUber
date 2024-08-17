@@ -159,8 +159,7 @@ namespace HitmanStatistics
                                 nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x3947C0, new int[1] { 0xB23 });
                                 break;
                             case GameVersions.GOG:
-                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x00008AD4, new int[] { 0x0, 0x154, 0x64, 0x2C0 });
-                                //nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x00107AC4, new int[] { 0x694, 0x460 });
+                                nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394010, new int[] { 0xBA0, 0x104, 0x82F });
                                 nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x220 });
                                 nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x208 });
                                 nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x21C });
