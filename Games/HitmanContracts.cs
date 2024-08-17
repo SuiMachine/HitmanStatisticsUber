@@ -160,13 +160,13 @@ namespace HitmanStatistics
                                 break;
                             case GameVersions.GOG:
                                 nbShotsFired = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394010, new int[] { 0xBA0, 0x104, 0x82F });
-                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x220 });
-                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x208 });
-                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x21C });
-                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x210 });
-                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x20C });
-                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x218 });
-                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x2A8C58, new int[] { 0x28, 0x214 });
+                                nbCloseEncounters = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB2F });
+                                nbHeadshots = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB17 });
+                                nbAlerts = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB2B });
+                                nbEnemiesK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB1F });
+                                nbEnemiesH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB1B });
+                                nbInnocentsK = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB27 });
+                                nbInnocentsH = Trainer.ReadPointerInteger(myProcess, baseAddress + 0x394020, new int[] { 0xB23 });
                                 break;
                         }
 
