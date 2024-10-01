@@ -34,10 +34,6 @@ namespace HitmanStatistics
             { "C06-2_MA", new Tuple<string, int>("Deadly Cargo", 6) },              { "C07-1_MA", new Tuple<string, int>("Traditions of the Trade", 7) },   { "C08-1_MA", new Tuple<string, int>("Slaying a Dragon", 8) },      { "C08-2_MA", new Tuple<string, int>("The Wang Fou Incident", 9) },         { "C08-3_MA", new Tuple<string, int>("The Seafood Massacre", 10) },
             { "C08-4_MA", new Tuple<string, int>("Lee Hong Assassination", 11) },   { "C09-1_MA", new Tuple<string, int>("Hunter and Hunted", 12) }};
 
-        Pointer[] HCmapPointersGOG = {
-            new Pointer(0x003945B4, new int[3] { 0x33c, 0x684, 0x6 }), new Pointer(0x00394598, new int[3] { 0x10, 0x194, 0xC0E }), new Pointer(0x00394598, new int[2] { 0x214, 0xC0E }), new Pointer(0x00394578, new int[2] { 0x1EC0, 0x49FA }), new Pointer(0x00394578, new int[3] { 0x1E00, 0xBC, 0x49FA }), new Pointer(0x00394578, new int[4] { 0x1D80, 0x7C, 0xBC, 0x49FA }),
-            new Pointer(0x00394578, new int[5] { 0x1D00, 0x7C, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[2] { 0x1E40, 0x49FA }), new Pointer(0x0039457C, new int[3] { 0x1D80, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[4] { 0x1D00, 0x7C, 0xBC, 0x49FA }), new Pointer(0x0039457C, new int[5] { 0x1C80, 0x7C, 0x7C, 0xBC, 0x49FA })};
-
         // Other variables.
         System.Text.Encoding enc = System.Text.Encoding.UTF8;
         Image imgSA, imgNotSA;
@@ -93,7 +89,7 @@ namespace HitmanStatistics
                 switch(currentGameVersion)
                 { 
                     case GameVersions.GOG:
-                         mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + HCmapPointersGOG[HCpointerNumber].address, HCmapPointersGOG[HCpointerNumber].offsets));
+                         mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x002775B4, new int[] { 0x20CC }));
                         break;
 
                     case GameVersions.Steam:
