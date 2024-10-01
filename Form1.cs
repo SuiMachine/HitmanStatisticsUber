@@ -10,6 +10,7 @@ namespace HitmanStatistics
     {
         Metronome _metronome;
         CheatsForms.CheatsHitman2 _hitman2cheats;
+        CheatsForms.CheatsHitmanContracts _hitmancontractscheats;
         Initial _initial;
         Hitman2 _hitman2;
         HitmanContracts _hitman3;
@@ -35,6 +36,7 @@ namespace HitmanStatistics
             _metronome = new Metronome(this);
             fonts = XMLSerialization.ReadFromXMLFile<FontStorage>("HitmanStatisticsUber.xml");
             _hitman2cheats = new CheatsForms.CheatsHitman2();
+            _hitmancontractscheats = new CheatsForms.CheatsHitmanContracts();
             DisplayPanel.Controls.Add(_initial);
             if (fonts.DarkMode)
                 setDark();
@@ -64,6 +66,13 @@ namespace HitmanStatistics
         {
             _hitman2cheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
             _hitman2cheats.ShowDialog();
+
+        }
+        private void contractsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _hitmancontractscheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
+            _hitmancontractscheats.ShowDialog();
+
         }
 
         public void setFormTo(int i)
@@ -227,5 +236,16 @@ namespace HitmanStatistics
                 RestartFont();
             }
         }
-	}
+
+        private void contractsTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.SilentAssassin;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.SilentAssassin = dialog.Font;
+                RestartFont();
+            }
+        }
+    }
 }
