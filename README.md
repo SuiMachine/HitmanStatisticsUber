@@ -26,7 +26,7 @@ Uber features
 In development / To do:
 -------
 * GOG support
-* Codename 47
+* Codename 47 cheats
 
 How to use
 -------
