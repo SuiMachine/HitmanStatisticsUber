@@ -25,7 +25,7 @@ Uber features
   
 In development / To do:
 -------
-* GOG support
+* Fix Broken shotsfired counter on GOG.
 * Codename 47 cheats
 
 How to use
