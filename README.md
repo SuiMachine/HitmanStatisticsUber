@@ -25,7 +25,7 @@ Uber features
   
 In development / To do:
 -------
-* Fix Broken shotsfired counter on GOG.
+* Fix Broken shotsfired counter on GOG Hitman 2.
 * Codename 47 cheats
 
 How to use
