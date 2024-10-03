@@ -237,18 +237,7 @@ namespace HitmanStatistics
         }
 
 
-        private void codename47TextToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var dialog = new FontDialog();
-            dialog.Font = fonts.SilentAssassin;
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                fonts.SilentAssassin = dialog.Font;
-                RestartFont();
-            }
 
-
-        }
         private void silentAssassinTextToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             var dialog = new FontDialog();
@@ -272,6 +261,20 @@ namespace HitmanStatistics
 
 
         }
+
+        private void codename47TextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.SilentAssassin;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.SilentAssassin = dialog.Font;
+                RestartFont();
+            }
+
+
+        }
+
 
     }
 }
