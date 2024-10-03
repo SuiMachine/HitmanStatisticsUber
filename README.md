@@ -25,8 +25,8 @@ Uber features
   
 In development / To do:
 -------
-* GOG support
-* Codename 47 and Contracts cheats
+* Fix broken shotsfired counter on GOG Hitman 2.
+* Codename 47 cheats
 
 How to use
 -------
