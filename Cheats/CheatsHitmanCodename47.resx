@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RTB_MainCheats.Text" xml:space="preserve">
-    <value>Open the hitmancondename47.ini file (it's in the folder where the Hitman game files are) and add the following lines to it:
+    <value>Open the hitmancodename47.ini file (it's in the folder where the Hitman game files are) and add the following lines to it:
 
 ENABLECONSOLE 1
 
 Type in following codes into console (opened by ~):
 
-give all - All ammo and weapons, including hidden and secret
+giveall - All ammo and weapons, including hidden and secret
 god 1 - God mode
 infammo - Infinite ammo
 invisible 1 - Invisibility

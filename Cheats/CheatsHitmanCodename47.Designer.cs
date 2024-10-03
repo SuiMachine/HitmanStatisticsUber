@@ -70,8 +70,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(553, 41);
             this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "Level Select Menu\nEdit the hitman2.ini and change \"DefaultScene=AllLevels/logos.g" +
-    "ms\" to \"DefaultScene=AllLevels/levelmenu.gms”";
+            this.richTextBox1.Text = "";
             // 
             // RTB_MainCheats
             // 
@@ -154,7 +153,7 @@
             this.B_WriteToMemory.UseVisualStyleBackColor = true;
             this.B_WriteToMemory.Click += new System.EventHandler(this.B_WriteToMemory_Click);
             // 
-            // CheatsHitmanCodename47
+            // CheatsHitmanContracts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

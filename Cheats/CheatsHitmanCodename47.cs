@@ -40,28 +40,77 @@ namespace CheatsForms
             InitializeComponent();
         }
 
- 
+
 
         private void B_SigScan_Click(object sender, EventArgs e)
         {
+            myProcess = Process.GetProcessesByName(processName).FirstOrDefault();
 
+            if (myProcess != null)
+            {
+                foundProcess = true;
+            }
+            else
+                foundProcess = false;
+
+            if (foundProcess)
+            {
+                byte[] mapBytes = null;
+                mapBytes = BitConverter.GetBytes(Trainer.ReadPointerDouble(myProcess, baseAddress + 0x002A6C5C, new int[2] { 0x98, 0xBC7 }));
+                string mapBytesStr = enc.GetString(mapBytes);
+                isMissionActive = true;
+
+                try
+                {
+                    // Trying to get the clean mission name and the mission number from the dictionary.
+                    mapName = mapValues[mapBytesStr].Item1;
+                    mapNumber = mapValues[mapBytesStr].Item2;
+                }
+                catch (KeyNotFoundException)
+                {
+                    isMissionActive = false;
+                }
+
+                if (isMissionActive) // A mission is currently active, ready to read memory.
+                {
+                    value = Trainer.ReadPointerByte("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x245 });
+                    TB_Value.Text = value.ToString();
+                }
+            }
+            else
+                MessageBox.Show("Process not running");
         }
 
         private void B_WriteToMemory_Click(object sender, EventArgs e)
         {
+            myProcess = Process.GetProcessesByName(processName).FirstOrDefault();
 
+            if (myProcess != null)
+            {
+                foundProcess = true;
+            }
+            else
+                foundProcess = false;
 
+            if (foundProcess)
+            {
+                Trainer.WritePointerByte("hitman2", baseAddress + 0x002A6C50, new int[3] { 0x28, secondOffset[mapNumber - 1], 0x245 }, value);
+            }
         }
 
         private void TB_Value_TextChanged(object sender, EventArgs e)
         {
-
+            var res = 0;
+            if (int.TryParse(TB_Value.Text, out res))
+            {
+                value = Convert.ToByte(res);
+            }
         }
 
         private void RTB_MainCheats_TextChanged(object sender, EventArgs e)
         {
 
         }
-    
+
     }
 }
