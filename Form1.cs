@@ -11,6 +11,7 @@ namespace HitmanStatistics
         Metronome _metronome;
         CheatsForms.CheatsHitman2 _hitman2cheats;
         CheatsForms.CheatsHitmanContracts _hitmancontractscheats;
+        CheatsForms.CheatsHitmanCodename47 _hitmancodename47cheats;
         Initial _initial;
         Hitman2 _hitman2;
         HitmanContracts _hitman3;
@@ -35,8 +36,10 @@ namespace HitmanStatistics
             _initial = new Initial(this);
             _metronome = new Metronome(this);
             fonts = XMLSerialization.ReadFromXMLFile<FontStorage>("HitmanStatisticsUber.xml");
+            _hitmancodename47cheats = new CheatsForms.CheatsHitmanCodename47();
             _hitman2cheats = new CheatsForms.CheatsHitman2();
             _hitmancontractscheats = new CheatsForms.CheatsHitmanContracts();
+
             DisplayPanel.Controls.Add(_initial);
             if (fonts.DarkMode)
                 setDark();
@@ -62,6 +65,12 @@ namespace HitmanStatistics
             _metronome.ShowDialog();
         }
 
+        private void codename47ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _hitmancodename47cheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
+            _hitmancodename47cheats.ShowDialog();
+
+        }
         private void silentAssassinToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _hitman2cheats.SetDesktopLocation(this.DesktopLocation.X + 10, this.DesktopLocation.Y + 10);
@@ -74,6 +83,7 @@ namespace HitmanStatistics
             _hitmancontractscheats.ShowDialog();
 
         }
+
 
         public void setFormTo(int i)
         {
@@ -226,7 +236,9 @@ namespace HitmanStatistics
             }
         }
 
-		private void silentAssassinTextToolStripMenuItem_Click(object sender, EventArgs e)
+
+
+        private void silentAssassinTextToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             var dialog = new FontDialog();
             dialog.Font = fonts.SilentAssassin;
@@ -246,6 +258,23 @@ namespace HitmanStatistics
                 fonts.SilentAssassin = dialog.Font;
                 RestartFont();
             }
+
+
         }
+
+        private void codename47TextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new FontDialog();
+            dialog.Font = fonts.SilentAssassin;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                fonts.SilentAssassin = dialog.Font;
+                RestartFont();
+            }
+
+
+        }
+
+
     }
 }

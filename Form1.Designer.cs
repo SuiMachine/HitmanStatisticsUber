@@ -49,6 +49,8 @@
             this.silentAssassinTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisplayPanel = new System.Windows.Forms.Panel();
             this.contractsTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.codename47TextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,6 +114,7 @@
             this.codename47ToolStripMenuItem.Name = "codename47ToolStripMenuItem";
             this.codename47ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.codename47ToolStripMenuItem.Text = "Codename 47";
+            this.codename47ToolStripMenuItem.Click += new System.EventHandler(this.codename47ToolStripMenuItem_Click);
             // 
             // silentAssassinToolStripMenuItem
             // 
@@ -197,6 +200,20 @@
             this.silentAssassinTextToolStripMenuItem.Text = "Silent Assassin text";
             this.silentAssassinTextToolStripMenuItem.Click += new System.EventHandler(this.silentAssassinTextToolStripMenuItem_Click);
             // 
+            // contractsTextToolStripMenuItem
+            // 
+            this.contractsTextToolStripMenuItem.Name = "contractsTextToolStripMenuItem";
+            this.contractsTextToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.contractsTextToolStripMenuItem.Text = "Silent Assassin text";
+            this.contractsToolStripMenuItem.Click += new System.EventHandler(this.contractsTextToolStripMenuItem_Click);
+            // 
+            // Codename47TextToolStripMenuItem
+            // 
+            this.codename47TextToolStripMenuItem.Name = "codename47TextToolStripMenuItem";
+            this.codename47TextToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
+            this.codename47TextToolStripMenuItem.Text = "Silent Assassin text";
+            this.codename47TextToolStripMenuItem.Click += new System.EventHandler(this.codename47TextToolStripMenuItem_Click);
+            // 
             // DisplayPanel
             // 
             this.DisplayPanel.AutoSize = true;
@@ -205,9 +222,6 @@
             this.DisplayPanel.Name = "DisplayPanel";
             this.DisplayPanel.Size = new System.Drawing.Size(291, 0);
             this.DisplayPanel.TabIndex = 0;
-            // 
-            // contractsTextToolStripMenuItem
-            // 
 
             // 
             // Form1
@@ -254,6 +268,8 @@
 		private System.Windows.Forms.ToolStripMenuItem timerTextToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem silentAssassinTextToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contractsTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem codename47TextToolStripMenuItem;
+
 
     }
 }
